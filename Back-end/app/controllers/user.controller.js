@@ -5,14 +5,15 @@ const User = require("../models/user.model.js");
 
 const { genSaltSync, compareSync, hashSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-// const { getUserByUserEmail } = require("../models/user.model.js");
+// cons { getUserByUserEmail } = require("../models/user.model.js");
 
 // Create and Save a new Customer
 exports.create = (req, res) => {
+  /* console.log(2); */
   // Validate request
   const body = req.body;
   const salt = genSaltSync(10);
-  body.password = hashSync(body.password, salt);
+  body.user_password = hashSync(body.user_password, salt);
 
   if (!req) {
     res.status(400).send({
