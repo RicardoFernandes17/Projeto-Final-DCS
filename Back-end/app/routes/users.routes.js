@@ -20,5 +20,5 @@ module.exports = (app) => {
   app.delete("/users", users.deleteAll);
 
   //Login a user
-  // app.post("(Login", users.login);
+  app.post("(Login", users.login);
 };
