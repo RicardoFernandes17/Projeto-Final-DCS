@@ -109,23 +109,23 @@ User.removeAll = (result) => {
   });
 };
 
-// User.getUserByUserEmail = (email, result) => {
-//   sql.query("SELECT * FROM users WHERE user_email = ?", [email], (err, res) => {
-//     if (err) {
-//       console.log("error: ", err);
-//       result(err, null);
-//       return;
-//     }
+User.getUserByUserEmail = (email, result) => {
+  sql.query("SELECT * FROM users WHERE user_mail = ?", [email], (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
 
-//     if (res.length) {
-//       console.log("found user: ", res[0]);
-//       result(null, res[0]);
-//       return;
-//     }
+    if (res.length) {
+      console.log("found user: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
 
-//     // not found User with the id
-//     result({ kind: "not_found" }, null);
-//   });
-// };
+    // not found User with the id
+    result({ kind: "not_found" }, null);
+  });
+};
 
 module.exports = User;

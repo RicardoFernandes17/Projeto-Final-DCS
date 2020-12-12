@@ -1,6 +1,6 @@
 const User = require("../models/user.model.js");
 // const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 // const dbconfig = require("../config/dbconfig.js");
 
 const { genSaltSync, compareSync, hashSync } = require("bcrypt");
@@ -126,19 +126,37 @@ exports.deleteAll = (res) => {
   });
 };
 
-// exports.login = (req, res) => {
-//   const body = req.body;
-//   getUserByUserEmail(body.user_mail, (err, results) => {
-//     if (!err) {
-//       console.log(err);
-//     }
-//     if (!results) {
-//       return res.status(404).send({ message: "Invalid email or password" });
-//     }
-//     const result = compareSync(body.user_password, results.password);
-//     if (result) {
-//       results.password = undefined;
-//       const jsonwebtoken = sign({ result: results }, "", { expiresIn: "1h" });
-//     }
-//   });
-// };
+exports.login = (req, res) => {
+  const body = req.body;
+  const salt = 10;
+  User.getUserByUserEmail(body.user_mail, (err, results) => {
+    if (err) {
+      console.log(err);
+    }
+    if (!results) {
+      return res.status(404).send({ message: "User  not found" });
+    }
+
+    bcrypt.compare(
+      body.user_password,
+      results.user_password,
+      (err, isMatch) => {
+        // res == true or res == false
+        console.log(
+          "Password certa?",
+          isMatch,
+          body.user_password,
+          results.user_password
+        );
+
+        if (err) {
+          console.log(err);
+        }
+        if (!isMatch) {
+          return res.status(401).send({ message: "Wrong Password" });
+        }
+        return res.status(200).send({ message: "Logged in" });
+      }
+    );
+  });
+};

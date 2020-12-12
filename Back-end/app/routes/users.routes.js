@@ -1,6 +1,5 @@
 module.exports = (app) => {
   const users = require("../controllers/user.controller.js");
-
   // Create a new user
   app.post("/users", users.create);
 
@@ -20,5 +19,5 @@ module.exports = (app) => {
   app.delete("/users", users.deleteAll);
 
   //Login a user
-  // app.post("(Login", users.login);
+  app.post("/login", users.login);
 };
