@@ -11,6 +11,7 @@ import {
   Icon,
   Form,
   FormH1,
+  SignInBtn,
   Text,
 } from "./SigninElements";
 
@@ -69,6 +70,7 @@ const SignIn = () => {
                 required
               />
               <FormButton type="submit">Continue</FormButton>
+              <SignInBtn to='/signup'>Register</SignInBtn>
               <Text>Forgot Password</Text>
             </Form>
           </FormContent>
