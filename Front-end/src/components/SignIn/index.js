@@ -41,10 +41,9 @@ const SignIn = () => {
 
     axios.post("http://localhost:3000/login/", user).then((res) => {
       if (res.status === 200) {
-        history.push("/users");
+        history.push("/profile");
       }
     });
-
   };
   return (
     <>
