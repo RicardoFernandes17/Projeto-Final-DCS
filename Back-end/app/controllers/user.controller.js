@@ -1,6 +1,7 @@
 const User = require("../models/user.model.js");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 // const dbconfig = require("../config/dbconfig.js");
 
 const { genSaltSync, compareSync, hashSync } = require("bcrypt");
@@ -40,7 +41,6 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Users from the database.
-
 exports.findAll = (req, res) => {
   User.getAll((err, data) => {
     if ((!req, err))
@@ -128,7 +128,8 @@ exports.deleteAll = (res) => {
 
 exports.login = (req, res) => {
   const body = req.body;
-  const salt = 10;
+
+  /** Verifica se o utilizador existe */
   User.getUserByUserEmail(body.user_mail, (err, results) => {
     if (err) {
       console.log(err);
@@ -137,25 +138,26 @@ exports.login = (req, res) => {
       return res.status(404).send({ message: "User  not found" });
     }
 
+    /** Se o utilizador existir, compara a password do input com a password do utilizador encontrado */
     bcrypt.compare(
       body.user_password,
       results.user_password,
       (err, isMatch) => {
-        // res == true or res == false
-        console.log(
-          "Password certa?",
-          isMatch,
-          body.user_password,
-          results.user_password
-        );
-
         if (err) {
           console.log(err);
         }
         if (!isMatch) {
           return res.status(401).send({ message: "Wrong Password" });
         }
-        return res.status(200).send({ message: "Logged in" });
+        /** Se a password estiver correta, atribui um token a esse utilizador, o 1º parametro acho que tá mal */
+        const token = jwt.sign(
+          { user_id: results.user_id, user_mail: results.user_mail },
+          process.env.JWT_KEY,
+          {
+            expiresIn: "1H",
+          }
+        );
+        return res.status(200).send({ message: "Logged in", token });
       }
     );
   });

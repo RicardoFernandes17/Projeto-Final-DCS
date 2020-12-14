@@ -1,3 +1,6 @@
+const { JsonWebTokenError } = require("jsonwebtoken");
+const login = require("../middleware/login.js");
+
 module.exports = (app) => {
   const users = require("../controllers/user.controller.js");
   // Create a new user
@@ -20,4 +23,9 @@ module.exports = (app) => {
 
   //Login a user
   app.post("/login", users.login);
+
+  app.get("/profile", login, (req, res, next) => {
+    /* Como passar o user para o front end */
+    console.log(req.user);
+  });
 };
