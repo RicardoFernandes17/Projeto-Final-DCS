@@ -11,6 +11,7 @@ import {
   Icon,
   Form,
   FormH1,
+  SignInBtn,
   Text,
 } from "./SigninElements";
 
@@ -44,56 +45,6 @@ const SignIn = () => {
       }
     });
 
-    /* var mail = data.mail;
-    var password = data.password;
-    console.log(mail, password);
-    var session_url = "http://localhost:3000/login/";
-    axios
-      .post(
-        session_url,
-        {},
-        {
-          auth: {
-            user_mail: mail,
-            user_password: password,
-          },
-        }
-      )
-      .then(function (response) {
-        console.log("Authenticated", response);
-      })
-      .catch(function (error) {
-        console.log("Error on Authentication", error);
-      }); */
-
-    /* await axios.post(
-      "http://localhost:3000/login/",
-      {},
-      {
-        auth: {
-          user_mail: data.mail,
-          user_password: data.password,
-        },
-      }
-    ); */
-
-    /* axios
-      .post("http://localhost:3000/login/", {
-        user_mail: data.mail,
-        user_password: data.password,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      }); */
-
-    /* axios.post("http://localhost:3000/login/", user).then((res) => {
-      console.log("sopa");
-      console.log(res);
-      console.log(res.data);
-    }); */
   };
   return (
     <>
@@ -120,6 +71,7 @@ const SignIn = () => {
                 required
               />
               <FormButton type="submit">Continue</FormButton>
+              <SignInBtn to='/signup'>Register</SignInBtn>
               <Text>Forgot Password</Text>
             </Form>
           </FormContent>
