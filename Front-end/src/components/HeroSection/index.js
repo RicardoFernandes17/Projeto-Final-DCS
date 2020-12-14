@@ -20,7 +20,7 @@ import {HeroContainer, HeroBg, VideoBg, HeroContent, HeroH1, HeroP, HeroBtnWrapp
                 <HeroH1>Descubra Portugal...Rota a Rota</HeroH1>
                 <HeroP>Registe-se para começar a sua jornada</HeroP>
                 <HeroBtnWrapper>
-                    <Button to='signup' onMouseEnter={onHover} onMouseLeave={onHover} primary="true" dark="true">
+                    <Button to='/signup' onMouseEnter={onHover} onMouseLeave={onHover} primary="true" dark="true">
                         Vamos lá {hover ? <ArrowForward/> : <ArrowRight/>}
                     </Button>
                 </HeroBtnWrapper>

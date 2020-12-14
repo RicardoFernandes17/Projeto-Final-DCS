@@ -22,7 +22,7 @@ const PlacesPage = () => {
             <ScrollToTop />
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
-            <PlacesContainer>
+            <PlacesContainer id='places'>
                 <Places {...saoPedro}/>
                 <Places {...saoPedro}/>
             </PlacesContainer>

@@ -20,7 +20,7 @@ const RoutesPage = () => {
             <ScrollToTop />
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
-            <RoutesContainer>
+            <RoutesContainer id='places'>
                 <RoutesP></RoutesP>
             </RoutesContainer>
             <Footer />
