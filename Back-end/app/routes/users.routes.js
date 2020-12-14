@@ -13,19 +13,19 @@ module.exports = (app) => {
   app.get("/users/:userId", users.findOne);
 
   // Update a user with userId
-  app.put("/users/:userId", users.update);
+  app.put("/users/:userId", login, users.update);
 
   // Delete a user with userId
-  app.delete("/users/:userId", users.delete);
+  app.delete("/users/:userId", login, users.delete);
 
   // Delete all  users
-  app.delete("/users", users.deleteAll);
+  app.delete("/users", login, users.deleteAll);
 
   //Login a user
   app.post("/login", users.login);
 
   app.get("/profile", login, (req, res, next) => {
-    /* Como passar o user para o front end */
-    console.log(req.user);
+    /* Passar o user para o profile */
+    return res.status(200).send(req.user);
   });
 };
