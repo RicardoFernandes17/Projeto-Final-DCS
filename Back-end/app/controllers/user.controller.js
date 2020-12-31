@@ -157,6 +157,7 @@ exports.login = (req, res) => {
             expiresIn: "1H",
           }
         );
+
         return res.status(200).send({ message: "Logged in", token });
       }
     );
