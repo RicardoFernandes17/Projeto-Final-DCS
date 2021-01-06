@@ -3,6 +3,7 @@ import { PlacesWrapper, PlacesRow, Column1, Column2, ImgWrap, Img, TextWrapper, 
 
 const Places = ({id, placename, city, creator, img}) => {
     return (
+    
         <>
             <PlacesWrapper>
                 <PlacesRow id={id}>
@@ -13,9 +14,9 @@ const Places = ({id, placename, city, creator, img}) => {
                     </Column1>
                     <Column2>
                         <TextWrapper>
-                            <Name>{placename}</Name>
+                            <Name to="/place" >{placename}</Name>
                             <City>{city}</City>
-                            <Creator>Created by: <CreatorLink>{creator}</CreatorLink></Creator>
+                            <Creator>Created by: <CreatorLink to="/profile">{creator}</CreatorLink></Creator>
                         </TextWrapper>
                     </Column2>
                 </PlacesRow>

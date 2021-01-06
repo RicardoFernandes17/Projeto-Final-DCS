@@ -6,6 +6,7 @@ import SignupPage from './pages/signup';
 import ProfilePage from './pages/profile';
 import RoutesPage from './pages/routesp';
 import PlacesPage from './pages/places';
+import PlacePage from './pages/place';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/profile" component={ProfilePage} exact/>
         <Route path="/routes" component={RoutesPage} exact/>
         <Route path="/places" component={PlacesPage} exact/>
+        <Route path="/place" component={PlacePage} exact/>
       </Switch>
     </Router>
   );
