@@ -79,7 +79,7 @@ SugestedItinerary.getAll = (result) => {
 
 SugestedItinerary.updateById = (id, itinerary, result) => {
   sql.query(
-    "UPDATE sugesteditineraries SET name = ?, date_creation = ?,  accommodation = ?, breakfast = ? morningActivity = ? lunch = ? activityAfterLunch = ? dinner = ? nightActivity = ? comments = ?  WHERE user_id = ?",
+    "UPDATE sugesteditineraries SET name = ?, country= ?, city= ?, accommodation = ?, breakfast = ?, morningActivity = ?, lunch = ?, activityAfterLunch = ?, dinner = ?, nightActivity = ?  WHERE id = ?",
     [
       itinerary.name,
       itinerary.country,
