@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const itineraries = require("../controllers/createItinerario.controller.js");
   // Create a new user
-  app.post("/itineraries", login, itineraries.create);
+  app.post("/itineraries", itineraries.create);
 
   // Retrieve all users
   app.get("/itineraries", itineraries.findAll);
