@@ -1,3 +1,5 @@
+const login = require("../middleware/login.js");
+
 module.exports = (app) => {
   const itineraries = require("../controllers/createItinerario.controller.js");
   // Create a new user
