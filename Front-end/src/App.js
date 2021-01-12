@@ -5,8 +5,8 @@ import SigninPage from './pages/signin';
 import SignupPage from './pages/signup';
 import ProfilePage from './pages/profile';
 import RoutesPage from './pages/routesp';
-import PlacesPage from './pages/places';
-import PlacePage from './pages/place';
+import SugRoutesPage from './pages/sugroutes';
+import RoutePage from './pages/route';
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
         <Route path="/signup" component={SignupPage} exact/>
         <Route path="/profile" component={ProfilePage} exact/>
         <Route path="/routes" component={RoutesPage} exact/>
-        <Route path="/places" component={PlacesPage} exact/>
-        <Route path="/place" component={PlacePage} exact/>
+        <Route path="/suggestedroutes" component={SugRoutesPage} exact/>
+        <Route path="/route/nick=:nick" component={RoutePage} exact/>
       </Switch>
     </Router>
   );

@@ -1,12 +1,12 @@
 import React from 'react'
-import { PlacesWrapper, PlacesRow, Column1, Column2, ImgWrap, Img, TextWrapper, Name, City,Creator,CreatorLink} from './PlacesElements'
+import { RoutesWrapper, RoutesRow, Column1, Column2, ImgWrap, Img, TextWrapper, Name, City,Creator,CreatorLink} from './SugRoutesElements'
 
-const Places = ({id, placename, city, creator, img}) => {
+const SugRoutes = ({id, nick, placename, city, creator, img}) => {
     return (
     
         <>
-            <PlacesWrapper>
-                <PlacesRow id={id}>
+            <RoutesWrapper>
+                <RoutesRow id={id}>
                     <Column1>
                         <ImgWrap>
                             <Img src={img} alt=""/>
@@ -14,15 +14,15 @@ const Places = ({id, placename, city, creator, img}) => {
                     </Column1>
                     <Column2>
                         <TextWrapper>
-                            <Name to="/place" >{placename}</Name>
+                            <Name to={'/route/nick='+nick} >{placename}</Name>
                             <City>{city}</City>
                             <Creator>Created by: <CreatorLink to="/profile">{creator}</CreatorLink></Creator>
                         </TextWrapper>
                     </Column2>
-                </PlacesRow>
-            </PlacesWrapper>   
+                </RoutesRow>
+            </RoutesWrapper>   
         </>
     )
 }
 
-export default Places
+export default SugRoutes

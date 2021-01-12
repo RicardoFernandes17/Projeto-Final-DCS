@@ -12,7 +12,7 @@ const Sidebar = ({isOpen, toggle}) => {
                     <SidebarLink to="braga" onClick={toggle}>Braga</SidebarLink>
                     <SidebarLink to="porto" onClick={toggle}>Porto</SidebarLink>
                     <SidebarLink to="lisboa" onClick={toggle}>Lisboa</SidebarLink>
-                    <SidebarLinkR to="/places" onClick={toggle}>Locais</SidebarLinkR>
+                    <SidebarLinkR to="/suggestedroutes" onClick={toggle}>Rotas Sugeridas</SidebarLinkR>
                     <SidebarLinkR to="/routes" onClick={toggle}>Rotas</SidebarLinkR>
                     <SidebarLinkR to="/signup" onClick={toggle}>Sign Up</SidebarLinkR>
                 </SidebarMenu>

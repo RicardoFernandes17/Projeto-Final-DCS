@@ -43,7 +43,7 @@ const Navbar = ({toggle}) => {
                             <NavLinks to="lisboa" smooth={true} duration={500} spy={true} exact='true' offset={-80}>Lisboa</NavLinks>
                         </NavItem>
                         <NavItem>
-                            <NavLinksR to="/places">Locais</NavLinksR>
+                            <NavLinksR to="/suggestedroutes">Rotas Sugeridas</NavLinksR>
                         </NavItem>
                         <NavItem>
                             <NavLinksR to="/routes">Rotas</NavLinksR>
