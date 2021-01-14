@@ -26,6 +26,6 @@ module.exports = (app) => {
 
   app.get("/profile", login, (req, res, next) => {
     /* Passar o user para o profile */
-    return res.status(200).send(req, res);
+    return res.status(200).send(req.user);
   });
 };

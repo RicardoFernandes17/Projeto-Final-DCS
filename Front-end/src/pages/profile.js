@@ -8,7 +8,6 @@ import ScrollToTop from "../components/ScrollToTop";
 
 const ProfilePage = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => {
     setIsOpen(!isOpen);
   };

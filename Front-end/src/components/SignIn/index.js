@@ -43,8 +43,10 @@ const SignIn = () => {
     axios.post("http://localhost:3000/login/", user).then((res) => {
       if (res.status === 200) {
         var nome = res.data.nome;
+        var token = res.data.token;
         Cookies.set("nome", nome);
-
+        Cookies.set("token", token);
+        console.log(res);
         history.push("/profile");
       }
     });
