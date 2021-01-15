@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import {Link as LinkR} from 'react-router-dom'
 
-export const PlacesContainer = styled.div`
+export const RoutesContainer = styled.div`
     color: #fff;
     background: #000;
     height:100vh;
     padding-top:140px;
 `
 
-export const PlacesWrapper = styled.div`
+export const RoutesWrapper = styled.div`
     display: grid;
     z-index: 1;
     width:80%;
@@ -23,7 +23,7 @@ export const PlacesWrapper = styled.div`
     margin-bottom: 15px;
 `
 
-export const PlacesRow = styled.div`
+export const RoutesRow = styled.div`
     padding-top:30px;
     padding-bottom:30px;
     display:grid;
