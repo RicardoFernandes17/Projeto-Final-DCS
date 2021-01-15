@@ -15,7 +15,7 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText, headline,darkTe
                                 <Heading lightText={lightText}>{headline}</Heading>
                                 <Subtitle darkText={darkText}>{description}</Subtitle>
                                 <BtnWrap>
-                                    <Button to='home'
+                                    <Button to={'/places/'+id}
                                     smooth={true}
                                     duration={500}
                                     spy={true}
@@ -24,7 +24,19 @@ const InfoSection = ({lightBg, id, imgStart, topLine, lightText, headline,darkTe
                                     primary={primary ? 1 : 0}
                                     dark={dark ? 1 : 0}
                                     dark2={dark2 ? 1 : 0}
-                                    >{buttonLabel}</Button>
+                                    >Locais {buttonLabel}</Button>
+                                </BtnWrap>
+                                <BtnWrap>
+                                    <Button to={'/routes/'+id}
+                                    smooth={true}
+                                    duration={500}
+                                    spy={true}
+                                    exact="true"
+                                    offset={-80}
+                                    primary={primary ? 1 : 0}
+                                    dark={dark ? 1 : 0}
+                                    dark2={dark2 ? 1 : 0}
+                                    >Rotas {buttonLabel}</Button>
                                 </BtnWrap>
                             </TextWrapper>
                         </Column1>
