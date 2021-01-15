@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import {
   Container,
   FormButton,
@@ -16,6 +17,7 @@ import {
 } from "./SignupElements";
 
 const SignUp = () => {
+  const history = useHistory();
   const [data, setData] = useState({
     name: "",
     address: "",
@@ -45,6 +47,7 @@ const SignUp = () => {
     axios.post("http://localhost:3000/users/", user).then((res) => {
       console.log(res);
       console.log(res.data);
+      history.push("/signin");
     });
   };
   return (

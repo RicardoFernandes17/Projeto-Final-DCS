@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+
 import {
   ProfileContainer,
   ProfileWrapper,
@@ -11,29 +14,54 @@ import {
   ImgWrap,
   Img,
 } from "./ProfileElements";
-//...
-// Do something the token in the login method
-const Profile = ({ id, nome, idade, img, alt }) => {
+
+const Profile = () => {
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    if (!profileData) {
+      getData();
+    }
+  }, [profileData]);
+
+  const getData = () => {
+    axios
+      .get("http://localhost:3000/profile", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.getJSON("token")}`,
+        },
+      })
+      .then((res) => {
+        setProfileData(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
-    <>
-      <ProfileContainer id={id}>
+    profileData && (
+      <ProfileContainer id={profileData.user_id}>
         <ProfileWrapper>
           <ProfileRow>
             <Column1>
               <TextWrapper>
-                <Nome>{nome}</Nome>
-                <Idade>{idade} anos.</Idade>
+                <Nome>{profileData.user_name}</Nome>
+                <Nome>{profileData.user_mail}</Nome>
+                {/* <Idade>{idade} anos.</Idade> */}
               </TextWrapper>
             </Column1>
-            <Column2>
+            {/* <Column2>
               <ImgWrap>
                 <Img src={img} alt={alt}></Img>
               </ImgWrap>
-            </Column2>
+            </Column2> */}
           </ProfileRow>
         </ProfileWrapper>
       </ProfileContainer>
-    </>
+    )
   );
 };
 
