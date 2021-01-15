@@ -104,11 +104,31 @@ export const FormButton = styled.button`
     }
 `;
 
+export const LinksWrapper = styled.div`
+    display:grid;
+`
+
+export const SignInBtn = styled(LinkR)`
+    text-align:center;
+    padding: 16px 0;
+    border:none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 20px;
+    cursor:pointer;
+    text-decoration:none;
+
+    &:hover{
+        color: #d5322c;
+    }
+`
+
 export const Text = styled.span`
     text-align:center;
     margin-top: 24px;
     color: #fff;
     font-size: 14px;
+    cursor: pointer;
 
     &:hover{
         color: #d5322c;
