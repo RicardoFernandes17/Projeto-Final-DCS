@@ -10,7 +10,7 @@ export const Container = styled.div`
     top:0;
     z-index:0;
     overflow:hidden;
-    background: linear-gradient(108deg,rgba(0,0,0,1) 0%,rgba(213,50,44,1) 100%);
+    background: #d5322c;
 `;
 
 export const FormWrap = styled.div`
@@ -105,16 +105,21 @@ export const FormButton = styled.button`
 `;
 
 export const LinksWrapper = styled.div`
-    display:grid;
+    display:flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    margin:16px;
+    text-align:center;
+    box-sizing:border-box;
+    font-size: 20px;
+    padding-top: 16px;
 `
 
 export const SignInBtn = styled(LinkR)`
     text-align:center;
-    padding: 16px 0;
     border:none;
     border-radius: 4px;
     color: #fff;
-    font-size: 20px;
     cursor:pointer;
     text-decoration:none;
 
@@ -125,9 +130,7 @@ export const SignInBtn = styled(LinkR)`
 
 export const Text = styled.span`
     text-align:center;
-    margin-top: 24px;
     color: #fff;
-    font-size: 14px;
     cursor: pointer;
 
     &:hover{

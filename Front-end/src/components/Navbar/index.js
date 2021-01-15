@@ -38,7 +38,7 @@ const Navbar = ({ toggle }) => {
   const logOut = () => {
     Cookies.remove("token");
   };
-
+  
   return (
     <>
       <Nav scrollNav={scrollNav}>
@@ -87,7 +87,7 @@ const Navbar = ({ toggle }) => {
               </NavLinks>
             </NavItem>
             <NavItem>
-              <NavLinksR to="/places">Locais</NavLinksR>
+              <NavLinksR to="/suggestedroutes">Rotas Sugeridas</NavLinksR>
             </NavItem>
             <NavItem>
               <NavLinksR to="/routes">Rotas</NavLinksR>

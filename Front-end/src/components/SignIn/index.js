@@ -12,6 +12,7 @@ import {
   Icon,
   Form,
   FormH1,
+  LinksWrapper,
   SignInBtn,
   Text,
 } from "./SigninElements";
@@ -75,9 +76,11 @@ const SignIn = () => {
                 type="password"
                 required
               />
-              <FormButton type="submit">Continue</FormButton>
-              <SignInBtn to="/signup">Register</SignInBtn>
-              <Text>Forgot Password</Text>
+              <FormButton type="submit">Continua</FormButton>
+              <LinksWrapper>
+                <SignInBtn to='/signup'>Regista-te</SignInBtn>
+                <Text>Esqueceste a Password?</Text>
+              </LinksWrapper>
             </Form>
           </FormContent>
         </FormWrap>

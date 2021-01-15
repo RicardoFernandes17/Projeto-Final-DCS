@@ -6,7 +6,7 @@ module.exports = (app) => {
   app.post("/sugesteditineraries", sugestedItineraries.create);
 
   // Retrieve all users
-  app.get("/sugesteditineraries", login, sugestedItineraries.findAll);
+  app.get("/sugesteditineraries", sugestedItineraries.findAll);
 
   // Retrieve a single user with userId
   app.get("/sugesteditineraries/:itineraryId", sugestedItineraries.findOne);

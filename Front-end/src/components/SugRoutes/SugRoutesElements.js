@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import {Link as LinkR} from 'react-router-dom'
 
-export const PlacesContainer = styled.div`
-    color: #000;
-    background: grey;
+export const RoutesContainer = styled.div`
+    color: #fff;
+    background: #000;
     height:100vh;
     padding-top:140px;
 `
 
-export const PlacesWrapper = styled.div`
+export const RoutesWrapper = styled.div`
     display: grid;
     z-index: 1;
     width:80%;
@@ -18,12 +18,12 @@ export const PlacesWrapper = styled.div`
     margin-left: auto;
     padding: 0;
     justify-content:center;
-    border:2px solid black;
+    border:2px solid #d5322c;
     border-radius:20px;
     margin-bottom: 15px;
 `
 
-export const PlacesRow = styled.div`
+export const RoutesRow = styled.div`
     padding-top:30px;
     padding-bottom:30px;
     display:grid;
@@ -50,12 +50,12 @@ export const Column2 = styled.div`
 
 export const ImgWrap = styled.div`
     max-width:400px;
-    max-height:200px;
 `
 
 export const Img = styled.img`
     width:100%;
-    margin:0 0 10px 0;
+    max-height:50%;
+    margin:0;
     padding-right: 0;
     border-radius:10px;
 `
@@ -66,7 +66,7 @@ export const TextWrapper = styled.div`
 `
 
 export const Name = styled(LinkR)`
-    color: #000;
+    color: #d5322c;
     font-size: 32px;
     line-height: 24px;
     font-weight: 700;
@@ -76,7 +76,7 @@ export const Name = styled(LinkR)`
 `
 
 export const City = styled.p`
-    color: #000;
+    color: #d5322c;
     font-size: 24px;
     line-height: 24px;
     font-weight: 700;
@@ -84,7 +84,7 @@ export const City = styled.p`
 `
 
 export const Creator = styled.p`
-    color: #000;
+    color: #d5322c;
     font-size: 24px;
     line-height: 24px;
     font-weight: 700;
@@ -92,6 +92,6 @@ export const Creator = styled.p`
 `
 
 export const CreatorLink = styled(LinkR)`
-    color: #000;
+    color: #d5322c;
     text-decoration:none;
 `
