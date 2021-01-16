@@ -7,6 +7,7 @@ import ProfilePage from './pages/profile';
 import RoutesPage from './pages/routesp';
 import SugRoutesPage from './pages/sugroutes';
 import RoutePage from './pages/route';
+import CreateRoutePage from './pages/createroute';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/routes" component={RoutesPage} exact/>
         <Route path="/suggestedroutes" component={SugRoutesPage} exact/>
         <Route path="/route/nick=:nick" component={RoutePage} exact/>
+        <Route path="/createroute" component={CreateRoutePage} exact/>
       </Switch>
     </Router>
   );
