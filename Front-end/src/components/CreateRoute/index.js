@@ -1,7 +1,60 @@
-import React from 'react'
-import { CreateRouteContainer , CreateRouteWrapper , CreationForm, Form, FormH1, FormLabel, FormInput, FormButton, Column1, Column2, FormWrap} from "./CreateRouteElements"
+import React, {useState} from 'react';
+import axios from "axios";
+import { 
+    CreateRouteContainer,
+    CreateRouteWrapper,
+    CreationForm,
+    Form,
+    FormH1,
+    FormLabel,
+    FormInput,
+    FormButton,
+    Column1,
+    Column2,
+    FormWrap,
+} from "./CreateRouteElements"
 
 const CreateRoute = () => {
+    const [data, setData] = useState({
+        hotel: "",
+        breakfast: "",
+        morningactivity: "",
+        lunch: "",
+        afternoonactivity: "",
+        dinner: "",
+        eveningactivity: "",
+    });
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+    
+        setData((curData) => {
+          return { ...curData, [name]: value };
+        });
+      };
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+    
+        const route = {
+          accommodation: data.hotel,
+          breakfast: data.breakfast,
+          morningActivity: data.morningactivity,
+          lunch: data.lunch,
+          activityAfterLunch: data.afternoonactivity,
+          dinner: data.dinner,
+          nightActivity: data.eveningactivity,
+          city: data.city,
+        };
+    
+        axios.post("http://localhost:3000/users/", route).then((res) => {
+          console.log(res);
+          console.log(res.data);
+        });
+      };
+
+
     return (
         <>
             <CreateRouteContainer>
@@ -12,23 +65,23 @@ const CreateRoute = () => {
                         </Column1>
                         <Column2>
                             <CreationForm>                            
-                                <Form>
+                                <Form onSubmit={handleSubmit} method="POST" action="">
                                     <FormLabel htmlFor="for">Estadia:</FormLabel>
-                                    <FormInput name="hotel" value=""/*  onChange={handleChange} */ type="text"/>
+                                    <FormInput name="hotel" value={data.hotel} onChange={handleChange} type="text" maxlength="50" required />
                                     <FormLabel htmlFor="for">Pequeno-almoço</FormLabel>
-                                    <FormInput name="breakfast" value=""/*  onChange={handleChange} */ type="text"/>
+                                    <FormInput name="breakfast" value={data.breakfast} onChange={handleChange} type="text" maxlength="50" required />
                                     <FormLabel htmlFor="for">Atividade da manhã</FormLabel>
-                                    <FormInput name="morningactivity" value=""/*  onChange={handleChange} */ type="text"/>
+                                    <FormInput name="morningactivity" value={data.morningactivity} onChange={handleChange} type="text" maxlength="50" required />
                                     <FormLabel htmlFor="for">Almoço</FormLabel>
-                                    <FormInput name="lunch" value=""/*  onChange={handleChange} */ type="text"/>
+                                    <FormInput name="lunch" value={data.lunch} onChange={handleChange} type="text" maxlength="50" required />
                                     <FormLabel htmlFor="for">Atividade da tarde</FormLabel>
-                                    <FormInput name="afternoonactivity" value=""/*  onChange={handleChange} */ type="text"/>
+                                    <FormInput name="afternoonactivity" value={data.afternoonactivity} onChange={handleChange} type="text" maxlength="50" required />
                                     <FormLabel htmlFor="for">Jantar</FormLabel>
-                                    <FormInput name="dinner" value=""/*  onChange={handleChange} */ type="text"/>
+                                    <FormInput name="dinner" value={data.dinner} onChange={handleChange} type="text" maxlength="50" required />
                                     <FormLabel htmlFor="for">Atividade da noite</FormLabel>
-                                    <FormInput name="eveningactivity" value=""/*  onChange={handleChange} */ type="text"/>
+                                    <FormInput name="eveningactivity" value={data.eveningactivity} onChange={handleChange} type="text" maxlength="50" required />
                                     <FormLabel htmlFor="for">Cidade</FormLabel>
-                                    <FormInput name="city" value=""/*  onChange={handleChange} */ type="text"/>
+                                    <FormInput name="city" value={data.city} onChange={handleChange} type="text" maxlength="15" required />
                                     <FormButton type="submit">Criar</FormButton>
                                 </Form>
                             </CreationForm>
