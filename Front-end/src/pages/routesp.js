@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import {RoutesContainer} from '../components/RoutesP/RoutesElements'
 import RoutesP from '../components/RoutesP'
 import Footer from '../components/Footer'
+import { saoPedro2 } from '../components/RoutesP/data';
 import ScrollToTop from '../components/ScrollToTop'
 
 
@@ -21,7 +22,7 @@ const RoutesPage = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <RoutesContainer id='places'>
-                <RoutesP></RoutesP>
+                <RoutesP {...saoPedro2}/>
             </RoutesContainer>
             <Footer />
         </>
