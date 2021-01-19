@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/users.routes.js")(app);
 
-require("./app/routes/cities.routes.js")(app);
+require("./app/routes/rating.routes.js")(app);
 require("./app/routes/createItinerario.routes.js")(app);
 require("./app/routes/sugesteditineraries.routes.js")(app);
 //require("./app/routes/users.routes.js")(app);
