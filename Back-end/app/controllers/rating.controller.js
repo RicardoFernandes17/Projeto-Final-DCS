@@ -7,12 +7,13 @@ exports.create = (req, res) => {
     });
   }
   const rating = new Rating({
+    rating_id: req.body.rating_id,
     rating_value: req.body.rating_value,
-    itinerary: req.body.itinerario_id,
-    user: req.body.user_id,
+    itinerario_id: req.body.itinerario_id,
+    user_id: req.body.user_id,
   });
 
-  // Save User in the database
+  // Save rating on database
   Rating.create(rating, (err, data) => {
     if (err)
       res.status(500).send({
