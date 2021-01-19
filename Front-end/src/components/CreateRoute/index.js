@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { 
     CreateRouteContainer,
     CreateRouteWrapper,
@@ -15,6 +16,7 @@ import {
 } from "./CreateRouteElements"
 
 const CreateRoute = () => {
+    const history = useHistory();
     const [data, setData] = useState({
         hotel: "",
         breakfast: "",
@@ -47,10 +49,13 @@ const CreateRoute = () => {
           nightActivity: data.eveningactivity,
           city: data.city,
         };
-    
-        axios.post("http://localhost:3000/users/", route).then((res) => {
+        
+        history.push("/routes")
+        
+        axios.post("http://localhost:3000/itineraries", route).then((res) => {
           console.log(res);
           console.log(res.data);
+          
         });
       };
 
