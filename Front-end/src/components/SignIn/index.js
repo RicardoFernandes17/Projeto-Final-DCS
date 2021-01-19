@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 import {
   Container,
   FormButton,
@@ -42,6 +43,11 @@ const SignIn = () => {
 
     axios.post("http://localhost:3000/login/", user).then((res) => {
       if (res.status === 200) {
+        var nome = res.data.nome;
+        var token = res.data.token;
+        Cookies.set("nome", nome);
+        Cookies.set("token", token);
+        console.log(res);
         history.push("/profile");
       }
     });
