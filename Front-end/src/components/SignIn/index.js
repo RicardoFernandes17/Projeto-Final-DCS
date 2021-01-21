@@ -45,9 +45,10 @@ const SignIn = () => {
       if (res.status === 200) {
         var nome = res.data.nome;
         var token = res.data.token;
+        var user_id = res.data.user_id;
+        Cookies.set("user_id", user_id);
         Cookies.set("nome", nome);
         Cookies.set("token", token);
-        console.log(res);
         history.push("/profile");
       }
     });
@@ -78,7 +79,7 @@ const SignIn = () => {
               />
               <FormButton type="submit">Continua</FormButton>
               <LinksWrapper>
-                <SignInBtn to='/signup'>Regista-te</SignInBtn>
+                <SignInBtn to="/signup">Regista-te</SignInBtn>
                 <Text>Esqueceste a Password?</Text>
               </LinksWrapper>
             </Form>

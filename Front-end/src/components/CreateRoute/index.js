@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+
 import {
   CreateRouteContainer,
   CreateRouteWrapper,
@@ -14,6 +15,7 @@ import {
   Column2,
   FormWrap,
 } from "./CreateRouteElements";
+import Cookies from "js-cookie";
 
 const CreateRoute = () => {
   const history = useHistory();
@@ -21,7 +23,9 @@ const CreateRoute = () => {
     name: "",
     hotel: "",
     breakfast: "",
+    city: "",
     morningactivity: "",
+    date_creation: "",
     lunch: "",
     afternoonactivity: "",
     dinner: "",
@@ -40,25 +44,39 @@ const CreateRoute = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    let date_creation = new Date().getTime();
+    let user_id = Cookies.get("user_id");
+
     const route = {
       name: data.name,
       accommodation: data.hotel,
       breakfast: data.breakfast,
       morningActivity: data.morningactivity,
-
+      date_creation: date_creation,
       lunch: data.lunch,
       activityAfterLunch: data.afternoonactivity,
       dinner: data.dinner,
       nightActivity: data.eveningactivity,
       city: data.city,
+      comments: data.comments,
+      user_id: user_id,
+    };
+
+    var config = {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.getJSON("token")}`,
+      },
     };
 
     history.push("/routes");
 
-    axios.post("http://localhost:3000/itineraries", route).then((res) => {
-      console.log(res);
-      console.log(res.data);
-    });
+    axios
+      .post("http://localhost:3000/itineraries", route, config)
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   return (
@@ -151,6 +169,15 @@ const CreateRoute = () => {
                     onChange={handleChange}
                     type="text"
                     maxlength="15"
+                    required
+                  />
+                  <FormLabel htmlFor="for">Comment:</FormLabel>
+                  <FormInput
+                    name="comments"
+                    value={data.comments}
+                    onChange={handleChange}
+                    type="text"
+                    maxlength="30"
                     required
                   />
                   <FormButton type="submit">Criar</FormButton>

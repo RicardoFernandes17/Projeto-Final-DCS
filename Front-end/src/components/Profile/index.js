@@ -7,12 +7,8 @@ import {
   ProfileWrapper,
   ProfileRow,
   Column1,
-  Column2,
   TextWrapper,
   Nome,
-  Idade,
-  ImgWrap,
-  Img,
 } from "./ProfileElements";
 
 const Profile = () => {
