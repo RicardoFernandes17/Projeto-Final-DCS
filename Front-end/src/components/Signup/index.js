@@ -45,7 +45,6 @@ const SignUp = () => {
     };
 
     axios.post("http://localhost:3000/users/", user).then((res) => {
-      console.log(res);
       console.log(res.data);
       history.push("/signin");
     });
@@ -92,7 +91,7 @@ const SignUp = () => {
               />
               <FormButton type="submit">Continua</FormButton>
               <LinksWrapper>
-                <SignUpBtn to='/signin'>LogIn</SignUpBtn>
+                <SignUpBtn to="/signin">LogIn</SignUpBtn>
                 <Text>Esqueceste a Password?</Text>
               </LinksWrapper>
             </Form>

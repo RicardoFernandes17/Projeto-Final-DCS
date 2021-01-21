@@ -1,13 +1,21 @@
 const sql = require("./db_mysql.js");
 
-const Rating = function (user) {
-  this.rating = user.na;
+const Rating = function (rating) {
+  this.rating = rating.rating_id;
+  this.rating_value = rating.rating_value;
+  this.itinerario_id = rating.itinerario_id;
+  this.user_id = rating.user_id;
 };
 
 Rating.create = (newRating, result) => {
   sql.query(
-    "INSERT INTO rating (rating_value,itinerario_id,user_id) VALUES (?,?,?)",
-    [newRating.rating_value],
+    "INSERT INTO rating (rating_id,rating_value,itinerario_id,user_id) VALUES (?,?,?,?)",
+    [
+      newRating.rating_id,
+      newRating.rating_value,
+      newRating.itinerario_id,
+      newRating.user_id,
+    ],
     (err, res) => {
       if (err) {
         console.log("error: ", err);

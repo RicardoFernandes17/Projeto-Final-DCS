@@ -162,7 +162,10 @@ exports.login = (req, res) => {
           }
         );
         var nome = results.user_name;
-        return res.status(200).send({ message: "Logged in", token, nome });
+        var user_id = results.user_id;
+        return res
+          .status(200)
+          .send({ message: "Logged in", token, nome, user_id });
       }
     );
   });
