@@ -2,9 +2,8 @@ const sql = require("./db_mysql.js");
 
 const Itinerary = function (itinerary) {
   this.name = itinerary.name;
-  this.country = itinerary.country;
+  this.date_creation = itinerary.date_creation;
   this.city = itinerary.city;
-  this.date_creation = itinerary.date;
   this.accommodation = itinerary.accommodation;
   this.breakfast = itinerary.breakfast;
   this.morningActivity = itinerary.morningActivity;
@@ -18,13 +17,12 @@ const Itinerary = function (itinerary) {
 
 Itinerary.create = (newItinerary, result) => {
   sql.query(
-    "INSERT INTO createitinerario (name,country,city,date_creation,accommodation,breakfast,morningActivity,lunch,activityAfterLunch,dinner,nightActivity,comments,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO createitinerario (name, date_creation,accommodation,city,breakfast,morningActivity,lunch,activityAfterLunch,dinner,nightActivity,comments,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
     [
       newItinerary.name,
-      newItinerary.country,
-      newItinerary.city,
-      newItinerary.date,
+      newItinerary.date_creation,
       newItinerary.accommodation,
+      newItinerary.city,
       newItinerary.breakfast,
       newItinerary.morningActivity,
       newItinerary.lunch,
@@ -85,12 +83,11 @@ Itinerary.getAll = (result) => {
 
 Itinerary.updateById = (id, itinerary, result) => {
   sql.query(
-    "UPDATE createitinerario SET name = ?, date_creation = ?,  accommodation = ?, breakfast = ? morningActivity = ? lunch = ? activityAfterLunch = ? dinner = ? nightActivity = ? comments = ?  WHERE user_id = ?",
+    "UPDATE createitinerario SET name = ?,  accommodation = ?, city = ?, breakfast = ? morningActivity = ? lunch = ? activityAfterLunch = ? dinner = ? nightActivity = ? comments = ?  WHERE user_id = ?",
     [
       itinerary.name,
-      itinerary.country,
-      itinerary.city,
       itinerary.accommodation,
+      itinerary.city,
       itinerary.breakfast,
       itinerary.morningActivity,
       itinerary.lunch,

@@ -11,10 +11,9 @@ exports.create = (req, res) => {
   // Create a User
   const itinerary = new Itinerary({
     name: req.body.name,
-    country: req.body.country,
-    city: req.body.city,
-    date: req.body.date_creation,
+    date_creation: req.body.date_creation,
     accommodation: req.body.accommodation,
+    city: req.body.city,
     breakfast: req.body.breakfast,
     morningActivity: req.body.morningActivity,
     lunch: req.body.lunch,
@@ -77,9 +76,8 @@ exports.update = (req, res) => {
 
   const itinerary = new Itinerary({
     name: req.body.name,
-    country: req.body.country,
     city: req.body.city,
-    date_connection: req.body.date,
+    date_creation: req.body.date_creation,
     accommodation: req.body.accommodation,
     breakfast: req.body.breakfast,
     morningActivity: req.body.morningActivity,
