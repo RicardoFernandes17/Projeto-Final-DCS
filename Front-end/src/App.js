@@ -12,7 +12,7 @@ import ProfilePage from "./pages/profile";
 import RoutesPage from "./pages/routesp";
 import SugRoutesPage from "./pages/sugroutes";
 import RoutePage from "./pages/route";
-import CreateRoutePage from "./pages/createroute"
+import CreateRoutePage from "./pages/createroute";
 import Cookies from "js-cookie";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
