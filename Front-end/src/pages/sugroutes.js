@@ -1,15 +1,15 @@
 import React, {useState} from 'react'
 import Sidebar from '../components/Sidebar'
 import Navbar from '../components/Navbar'
-import {PlacesContainer} from '../components/Places/PlacesElements'
-import Places from '../components/Places'
+import {RoutesContainer} from '../components/SugRoutes/SugRoutesElements'
+import SugRoutes from '../components/SugRoutes'
 import Footer from '../components/Footer'
-import { saoPedro } from '../components/Places/data';
+import { saoPedro, saoPedro2 } from '../components/SugRoutes/data';
 import ScrollToTop from '../components/ScrollToTop'
 
 
 
-const PlacesPage = () => {
+const SugRoutesPage = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => {
@@ -22,13 +22,13 @@ const PlacesPage = () => {
             <ScrollToTop />
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
-            <PlacesContainer>
-                <Places {...saoPedro}/>
-                <Places {...saoPedro}/>
-            </PlacesContainer>
+            <RoutesContainer id='places'>
+                <SugRoutes {...saoPedro}/>
+                <SugRoutes {...saoPedro2}/>
+            </RoutesContainer>
             <Footer />
         </>
     )
 }
 
-export default PlacesPage
+export default SugRoutesPage

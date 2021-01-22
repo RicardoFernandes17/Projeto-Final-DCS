@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import {
   Container,
   FormButton,
@@ -10,10 +11,13 @@ import {
   Icon,
   Form,
   FormH1,
+  LinksWrapper,
+  SignUpBtn,
   Text,
 } from "./SignupElements";
 
 const SignUp = () => {
+  const history = useHistory();
   const [data, setData] = useState({
     name: "",
     address: "",
@@ -41,8 +45,8 @@ const SignUp = () => {
     };
 
     axios.post("http://localhost:3000/users/", user).then((res) => {
-      console.log(res);
       console.log(res.data);
+      history.push("/signin");
     });
   };
   return (
@@ -86,7 +90,10 @@ const SignUp = () => {
                 required
               />
               <FormButton type="submit">Continua</FormButton>
-              <Text>Esqueceste a Password?</Text>
+              <LinksWrapper>
+                <SignUpBtn to="/signin">LogIn</SignUpBtn>
+                <Text>Esqueceste a Password?</Text>
+              </LinksWrapper>
             </Form>
           </FormContent>
         </FormWrap>

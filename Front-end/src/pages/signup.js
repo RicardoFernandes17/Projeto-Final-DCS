@@ -3,6 +3,7 @@ import ScrollToTop from '../components/ScrollToTop'
 import SignUp from '../components/Signup'
 
 const SignupPage = () => {
+
     return (
         <>
             <ScrollToTop />

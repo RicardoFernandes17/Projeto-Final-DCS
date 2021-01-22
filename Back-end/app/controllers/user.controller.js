@@ -151,13 +151,21 @@ exports.login = (req, res) => {
         }
         /** Se a password estiver correta, atribui um token a esse utilizador, o 1º parametro acho que tá mal */
         const token = jwt.sign(
-          { user_id: results.user_id, user_mail: results.user_mail },
+          {
+            user_id: results.user_id,
+            user_mail: results.user_mail,
+            user_name: results.user_name,
+          },
           process.env.JWT_KEY,
           {
             expiresIn: "1H",
           }
         );
-        return res.status(200).send({ message: "Logged in", token });
+        var nome = results.user_name;
+        var user_id = results.user_id;
+        return res
+          .status(200)
+          .send({ message: "Logged in", token, nome, user_id });
       }
     );
   });

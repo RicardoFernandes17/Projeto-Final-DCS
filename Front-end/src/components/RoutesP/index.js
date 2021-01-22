@@ -1,22 +1,24 @@
 import React from 'react'
-import { RoutesWrapper, RouteRow, Column1, Column2, ImgWrap, Img, TextWrapper, Name} from './RoutesElements'
+import { RoutesWrapper, RoutesRow, Column1, Column2, ImgWrap, Img, TextWrapper, Name, City,Creator,CreatorLink} from './RoutesElements'
 
-const Routes = () => {
+const Routes = ({id, nick, placename, city, creator, img}) => {
     return (
         <>
             <RoutesWrapper>
-                <RouteRow>
+                <RoutesRow id={id}>
                     <Column1>
                         <ImgWrap>
-                            <Img />
+                            <Img src={img} alt=""/>
                         </ImgWrap>
                     </Column1>
                     <Column2>
                         <TextWrapper>
-                            <Name>Rota do Monte São Pedro1</Name>
+                            <Name to={'/route/nick='+nick} >{placename}</Name>
+                            <City>{city}</City>
+                            <Creator>Created by: <CreatorLink to="/profile">{creator}</CreatorLink></Creator>
                         </TextWrapper>
                     </Column2>
-                </RouteRow>
+                </RoutesRow>
             </RoutesWrapper>   
         </>
     )

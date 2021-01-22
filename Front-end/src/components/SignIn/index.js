@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Cookies from "js-cookie";
 import {
   Container,
   FormButton,
@@ -11,6 +12,7 @@ import {
   Icon,
   Form,
   FormH1,
+  LinksWrapper,
   SignInBtn,
   Text,
 } from "./SigninElements";
@@ -41,6 +43,12 @@ const SignIn = () => {
 
     axios.post("http://localhost:3000/login/", user).then((res) => {
       if (res.status === 200) {
+        var nome = res.data.nome;
+        var token = res.data.token;
+        var user_id = res.data.user_id;
+        Cookies.set("user_id", user_id);
+        Cookies.set("nome", nome);
+        Cookies.set("token", token);
         history.push("/profile");
       }
     });
@@ -69,9 +77,11 @@ const SignIn = () => {
                 type="password"
                 required
               />
-              <FormButton type="submit">Continue</FormButton>
-              <SignInBtn to='/signup'>Register</SignInBtn>
-              <Text>Forgot Password</Text>
+              <FormButton type="submit">Continua</FormButton>
+              <LinksWrapper>
+                <SignInBtn to="/signup">Regista-te</SignInBtn>
+                <Text>Esqueceste a Password?</Text>
+              </LinksWrapper>
             </Form>
           </FormContent>
         </FormWrap>
