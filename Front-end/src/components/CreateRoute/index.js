@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 import {
   CreateRouteContainer,
   CreateRouteWrapper,
@@ -18,7 +19,6 @@ import {
 import Cookies from "js-cookie";
 
 const CreateRoute = () => {
-  const history = useHistory();
   const [data, setData] = useState({
     name: "",
     hotel: "",
@@ -31,6 +31,18 @@ const CreateRoute = () => {
     dinner: "",
     eveningactivity: "",
   });
+  const history = useHistory();
+
+  const [state, setState] = useState({
+    open: false,
+    msg: "",
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const [success, setSuccess] = useState(true);
+
+  const { vertical, horizontal, open } = state;
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -70,17 +82,44 @@ const CreateRoute = () => {
       },
     };
 
-    history.push("/routes");
-
     axios
       .post("http://localhost:3000/itineraries", route, config)
       .then((res) => {
-        console.log(res);
+        if (res.status === 201) {
+          setState({ ...state, open: true, msg: res.data.message });
+          setSuccess(true);
+          console.log(res);
+          setTimeout(function timeout() {
+            history.push("/route?id=" + res.data.data.id);
+          }, 1500);
+        }
+      })
+      .catch((error) => {
+        setState({ ...state, open: true, msg: error.response.data.message });
+        setSuccess(false);
       });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
   };
 
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message={state.msg}
+        key={vertical + horizontal}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={success === true ? "success" : "error"}
+        >
+          {state.msg}
+        </Alert>
+      </Snackbar>
       <CreateRouteContainer>
         <CreateRouteWrapper>
           <FormWrap>

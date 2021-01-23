@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
 import {
   Container,
   FormButton,
@@ -17,13 +19,24 @@ import {
 } from "./SignupElements";
 
 const SignUp = () => {
-  const history = useHistory();
   const [data, setData] = useState({
     name: "",
     address: "",
     mail: "",
     password: "",
   });
+  const history = useHistory();
+
+  const [state, setState] = useState({
+    open: false,
+    msg: "",
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const [success, setSuccess] = useState(true);
+
+  const { vertical, horizontal, open } = state;
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -44,11 +57,27 @@ const SignUp = () => {
       user_password: data.password,
     };
 
-    axios.post("http://localhost:3000/users/", user).then((res) => {
-      console.log(res.data);
-      history.push("/signin");
-    });
+    axios
+      .post("http://localhost:3000/users/", user)
+      .then((res) => {
+        if (res.status === 201) {
+          setState({ ...state, open: true, msg: res.data.message });
+          setSuccess(true);
+          setTimeout(function timeout() {
+            history.push("/signin");
+          }, 1500);
+        }
+      })
+      .catch((error) => {
+        setState({ ...state, open: true, msg: error.response.data.message });
+        setSuccess(false);
+      });
   };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
   return (
     <>
       <Container>
@@ -94,6 +123,20 @@ const SignUp = () => {
                 <SignUpBtn to="/signin">LogIn</SignUpBtn>
                 <Text>Esqueceste a Password?</Text>
               </LinksWrapper>
+              <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={open}
+                onClose={handleClose}
+                message={state.msg}
+                key={vertical + horizontal}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity={success === true ? "success" : "error"}
+                >
+                  {state.msg}
+                </Alert>
+              </Snackbar>
             </Form>
           </FormContent>
         </FormWrap>

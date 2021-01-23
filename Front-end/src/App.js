@@ -33,13 +33,31 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+const LoggedRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      !Cookies.get("token") ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/",
+            state: { from: props.location },
+          }}
+        />
+      )
+    }
+  />
+);
+
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/" component={Home} exact />
-        <Route path="/signin" component={SigninPage} exact />
-        <Route path="/signup" component={SignupPage} exact />
+        <LoggedRoute path="/signin" component={SigninPage} exact />
+        <LoggedRoute path="/signup" component={SignupPage} exact />
         <PrivateRoute path="/profile" component={ProfilePage} exact />
         <Route path="/routes" component={RoutesPage} exact />
         <Route path="/suggestedroutes" component={SugRoutesPage} exact />
