@@ -19,13 +19,13 @@ import Cookies from "js-cookie";
 const Navbar = ({ toggle }) => {
   const [scrollNav, setScrollNav] = useState(false);
 
-  window.homepagecheck = function() {
+  window.homepagecheck = function () {
     var check = false;
-    if(document.location.pathname === "/"){
-      check=true;
-      }
+    if (document.location.pathname === "/") {
+      check = true;
+    }
     return check;
-  }
+  };
 
   const changeNav = () => {
     if (window.scrollY >= 110) {
@@ -44,9 +44,11 @@ const Navbar = ({ toggle }) => {
   };
 
   const logOut = () => {
+    Cookies.remove("nome");
+    Cookies.remove("user_id");
     Cookies.remove("token");
   };
-  
+
   return (
     <>
       <Nav scrollNav={scrollNav}>
@@ -58,46 +60,48 @@ const Navbar = ({ toggle }) => {
             <FaBars />
           </MobileIcon>
           <NavMenu>
-
-          {window.homepagecheck() ?(<>
-              <NavItem>
-              <NavLinks
-                to="braga"
-                smooth={true}
-                duration={500}
-                spy={true}
-                exact="true"
-                offset={-80}
-              >
-                Braga
-              </NavLinks>
-            </NavItem>
-            <NavItem>
-            <NavLinks
-              to="porto"
-              smooth={true}
-              duration={500}
-              spy={true}
-              exact="true"
-              offset={-80}
-            >
-              Porto
-            </NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks
-              to="lisboa"
-              smooth={true}
-              duration={500}
-              spy={true}
-              exact="true"
-              offset={-80}
-            >
-              Lisboa
-            </NavLinks>
-          </NavItem>
-          </>
-          ):(<></>)}
+            {window.homepagecheck() ? (
+              <>
+                <NavItem>
+                  <NavLinks
+                    to="braga"
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact="true"
+                    offset={-80}
+                  >
+                    Braga
+                  </NavLinks>
+                </NavItem>
+                <NavItem>
+                  <NavLinks
+                    to="porto"
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact="true"
+                    offset={-80}
+                  >
+                    Porto
+                  </NavLinks>
+                </NavItem>
+                <NavItem>
+                  <NavLinks
+                    to="lisboa"
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact="true"
+                    offset={-80}
+                  >
+                    Lisboa
+                  </NavLinks>
+                </NavItem>
+              </>
+            ) : (
+              <></>
+            )}
             <NavItem>
               <NavLinksR to="/suggestedroutes">Rotas Sugeridas</NavLinksR>
             </NavItem>

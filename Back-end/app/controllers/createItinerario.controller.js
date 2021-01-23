@@ -31,7 +31,7 @@ exports.create = (req, res) => {
         message:
           err.message || "Some error occurred while creating the Itinerary.",
       });
-    else res.send(data);
+    else res.status(201).send({ message: "Route created sucessfully", data });
   });
 };
 

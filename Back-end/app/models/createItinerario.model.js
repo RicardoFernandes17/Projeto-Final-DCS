@@ -47,7 +47,7 @@ Itinerary.create = (newItinerary, result) => {
 
 Itinerary.findById = (itineraryId, result) => {
   sql.query(
-    "SELECT * FROM createitinerario WHERE id = ?",
+    "SELECT * FROM createitinerario WHERE itinerario_id = ?",
     [itineraryId],
     (err, res) => {
       if (err) {
@@ -83,10 +83,11 @@ Itinerary.getAll = (result) => {
 
 Itinerary.updateById = (id, itinerary, result) => {
   sql.query(
-    "UPDATE createitinerario SET name = ?,  accommodation = ?, city = ?, breakfast = ? morningActivity = ? lunch = ? activityAfterLunch = ? dinner = ? nightActivity = ? comments = ?  WHERE user_id = ?",
+    "UPDATE createitinerario SET name = ?,  accommodation = ?, date_creation = ?, city = ?, breakfast = ? morningActivity = ? lunch = ? activityAfterLunch = ? dinner = ? nightActivity = ? comments = ?  WHERE user_id = ?",
     [
       itinerary.name,
       itinerary.accommodation,
+      itinerary.date_creation,
       itinerary.city,
       itinerary.breakfast,
       itinerary.morningActivity,
@@ -117,22 +118,26 @@ Itinerary.updateById = (id, itinerary, result) => {
 };
 
 Itinerary.remove = (id, result) => {
-  sql.query("DELETE FROM createitinerario WHERE id = ?", [id], (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
+  sql.query(
+    "DELETE FROM createitinerario WHERE itinerario_id = ?",
+    [id],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
 
-    if (res.affectedRows == 0) {
-      // not found User with the id
-      result({ kind: "not_found" }, null);
-      return;
-    }
+      if (res.affectedRows == 0) {
+        // not found User with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
 
-    console.log("deleted itinerary with id: ", id);
-    result(null, res);
-  });
+      console.log("deleted itinerary with id: ", id);
+      result(null, res);
+    }
+  );
 };
 
 Itinerary.removeAll = (result) => {
