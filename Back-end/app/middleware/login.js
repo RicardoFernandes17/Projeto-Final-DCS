@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 module.exports = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
-  console.log(token);
   /** Se não tiver token, devolve 401-Unauthorized */
   if (token == null) return res.sendStatus(401);
 
@@ -14,7 +13,6 @@ module.exports = (req, res, next) => {
       res.sendStatus(403);
     }
     req.user = user;
-    console.log(user);
     next();
   });
 };
