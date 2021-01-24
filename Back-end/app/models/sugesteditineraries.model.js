@@ -1,4 +1,4 @@
-const sql = require("./db_mysql.js");
+const sql = require('./db_mysql.js');
 
 const SugestedItinerary = function (itinerary) {
   this.name = itinerary.name;
@@ -29,11 +29,11 @@ SugestedItinerary.create = (newItinerary, result) => {
 
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
         return;
       }
-      console.log("created itinerary: ", { id: res.insertId, ...newItinerary });
+      console.log('created itinerary: ', { id: res.insertId, ...newItinerary });
       result(null, { id: res.insertId, ...newItinerary });
     }
   );
@@ -41,43 +41,43 @@ SugestedItinerary.create = (newItinerary, result) => {
 
 SugestedItinerary.findById = (itineraryId, result) => {
   sql.query(
-    "SELECT * FROM sugesteditineraries WHERE id = ?",
+    'SELECT * FROM sugesteditineraries WHERE id = ?',
     [itineraryId],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log("found itinerary: ", res[0]);
+        console.log('found itinerary: ', res[0]);
         result(null, res[0]);
         return;
       }
 
       // not found User with the id
-      result({ kind: "not_found" }, null);
+      result({ kind: 'not_found' }, null);
     }
   );
 };
 
 SugestedItinerary.getAll = (result) => {
-  sql.query("SELECT * FROM sugesteditineraries", (err, res) => {
+  sql.query('SELECT * FROM sugesteditineraries', (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      console.log('error: ', err);
       result(null, err);
       return;
     }
 
-    console.log("itineraries: ", res);
+    console.log('itineraries: ', res);
     result(null, res);
   });
 };
 
 SugestedItinerary.updateById = (id, itinerary, result) => {
   sql.query(
-    "UPDATE sugesteditineraries SET name = ?, date_creation = ?,  accommodation = ?, city = ?, breakfast = ? morningActivity = ? lunch = ? activityAfterLunch = ? dinner = ? nightActivity = ? comments = ?  WHERE user_id = ?",
+    'UPDATE sugesteditineraries SET name = ?, date_creation = ?,  accommodation = ?, city = ?, breakfast = ? morningActivity = ? lunch = ? activityAfterLunch = ? dinner = ? nightActivity = ? comments = ?  WHERE user_id = ?',
     [
       itinerary.name,
       itinerary.date_creation,
@@ -93,17 +93,17 @@ SugestedItinerary.updateById = (id, itinerary, result) => {
     ],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(null, err);
         return;
       }
 
       if (res.affectedRows == 0) {
-        result({ kind: "not_found" }, null);
+        result({ kind: 'not_found' }, null);
         return;
       }
 
-      console.log("updated itineraries: ", { id: id, ...itinerary });
+      console.log('updated itineraries: ', { id: id, ...itinerary });
       result(null, { id: id, ...itinerary });
     }
   );
@@ -111,31 +111,31 @@ SugestedItinerary.updateById = (id, itinerary, result) => {
 
 SugestedItinerary.remove = (id, result) => {
   sql.query(
-    "DELETE FROM sugesteditineraries WHERE id = ?",
+    'DELETE FROM sugesteditineraries WHERE id = ?',
     [id],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        console.log('error: ', err);
         result(null, err);
         return;
       }
 
       if (res.affectedRows == 0) {
         // not found User with the id
-        result({ kind: "not_found" }, null);
+        result({ kind: 'not_found' }, null);
         return;
       }
 
-      console.log("deleted itinerary with id: ", id);
+      console.log('deleted itinerary with id: ', id);
       result(null, res);
     }
   );
 };
 
 SugestedItinerary.removeAll = (result) => {
-  sql.query("DELETE FROM sugesteditineraries", (err, res) => {
+  sql.query('DELETE FROM sugesteditineraries', (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      console.log('error: ', err);
       result(null, err);
       return;
     }

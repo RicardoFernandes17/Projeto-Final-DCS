@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import Cookies from "js-cookie";
+import Cookies, { set } from "js-cookie";
+import Snackbar from "@material-ui/core/Snackbar";
+import Alert from "@material-ui/lab/Alert";
+
 import {
   Container,
   FormButton,
@@ -24,6 +27,17 @@ const SignIn = () => {
   });
   const history = useHistory();
 
+  const [state, setState] = useState({
+    open: false,
+    msg: "",
+    vertical: "top",
+    horizontal: "center",
+  });
+
+  const [success, setSuccess] = useState(true);
+
+  const { vertical, horizontal, open } = state;
+
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -41,18 +55,33 @@ const SignIn = () => {
       user_password: data.password,
     };
 
-    axios.post("http://localhost:3000/login/", user).then((res) => {
-      if (res.status === 200) {
-        var nome = res.data.nome;
-        var token = res.data.token;
-        var user_id = res.data.user_id;
-        Cookies.set("user_id", user_id);
-        Cookies.set("nome", nome);
-        Cookies.set("token", token);
-        history.push("/profile");
-      }
-    });
+    axios
+      .post("http://localhost:3000/login/", user)
+      .then((res) => {
+        if (res.status === 200) {
+          var nome = res.data.nome;
+          var token = res.data.token;
+          var user_id = res.data.user_id;
+          Cookies.set("user_id", user_id);
+          Cookies.set("nome", nome);
+          Cookies.set("token", token);
+          setState({ ...state, open: true, msg: res.data.message });
+          setSuccess(true);
+          setTimeout(function timeout() {
+            history.push("/profile");
+          }, 1500);
+        }
+      })
+      .catch((error) => {
+        setState({ ...state, open: true, msg: error.response.data.message });
+        setSuccess(false);
+      });
   };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
   return (
     <>
       <Container>
@@ -82,6 +111,20 @@ const SignIn = () => {
                 <SignInBtn to="/signup">Regista-te</SignInBtn>
                 <Text>Esqueceste a Password?</Text>
               </LinksWrapper>
+              <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={open}
+                onClose={handleClose}
+                message={state.msg}
+                key={vertical + horizontal}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity={success === true ? "success" : "error"}
+                >
+                  {state.msg}
+                </Alert>
+              </Snackbar>
             </Form>
           </FormContent>
         </FormWrap>

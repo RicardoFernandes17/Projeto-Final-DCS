@@ -1,5 +1,7 @@
-import React from "react";
+
+import React, { useEffect, useState } from 'react';
 import {
+  RoutesContainer,
   RoutesWrapper,
   RoutesRow,
   Column1,
@@ -11,29 +13,53 @@ import {
   City,
   Creator,
   CreatorLink,
-} from "./RoutesElements";
+} from './RoutesElements';
+import axios from 'axios';
 
-const Routes = ({ id, nick, placename, city, creator, img }) => {
-  return (
-    <>
-      <RoutesWrapper>
-        <RoutesRow id={id}>
+const Routes = () => {
+  function handleRoutes(data) {
+    return (
+      <RoutesWrapper key={data.itinerario_id}>
+        <RoutesRow id={data.itinerario_id}>
           <Column1>
             <ImgWrap>
-              <Img src={img} alt='' />
+              <Img src='https://source.unsplash.com/random?portugal' alt='' />
             </ImgWrap>
           </Column1>
           <Column2>
             <TextWrapper>
-              <Name to={"/route/id=" + id}>{placename}</Name>
-              <City>{city}</City>
+              <Name to={'/route/id=' + data.itinerario_id}>{data.name}</Name>
+              <City>{data.city}</City>
               <Creator>
-                Created by: <CreatorLink to='/profile'>{creator}</CreatorLink>
+                Created by:
+                <CreatorLink to='/profile'>{data.user_id}</CreatorLink>
               </Creator>
             </TextWrapper>
           </Column2>
         </RoutesRow>
       </RoutesWrapper>
+    );
+  }
+
+  const [routesData, setRoutesData] = useState([]);
+
+  useEffect(() => {
+    if (routesData.length === 0) {
+      handleStart();
+    }
+  }, [routesData]);
+
+  const handleStart = () => {
+    axios.get('http://localhost:3000/itineraries').then((res) => {
+      setRoutesData(res.data);
+    });
+  };
+
+  return (
+    <>
+      <RoutesContainer id='places'>
+        {routesData.map((route) => handleRoutes(route))}
+      </RoutesContainer>
     </>
   );
 };

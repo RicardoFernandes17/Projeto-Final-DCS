@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import {
+  RoutesContainer,
   RoutesWrapper,
   RoutesRow,
   Column1,
@@ -9,31 +10,49 @@ import {
   TextWrapper,
   Name,
   City,
-  Creator,
-  CreatorLink,
-} from "./SugRoutesElements";
+} from './SugRoutesElements';
+import axios from 'axios';
 
-const SugRoutes = ({ id, nick, placename, city, creator, img }) => {
-  return (
-    <>
-      <RoutesWrapper>
-        <RoutesRow id={id}>
+const SugRoutes = () => {
+  function handleSugRoutes(data) {
+    return (
+      <RoutesWrapper key={data.id}>
+        <RoutesRow id={data.id}>
           <Column1>
             <ImgWrap>
-              <Img src={img} alt='' />
+              <Img src='https://source.unsplash.com/random?portugal' alt='' />
             </ImgWrap>
           </Column1>
           <Column2>
             <TextWrapper>
-              <Name to={"/route/id=" + id}>{placename}</Name>
-              <City>{city}</City>
-              <Creator>
-                Created by: <CreatorLink to='/profile'>{creator}</CreatorLink>
-              </Creator>
+              <Name to={'/route/id=' + data.id}>{data.name}</Name>
+              <City>{data.city}</City>
             </TextWrapper>
           </Column2>
         </RoutesRow>
       </RoutesWrapper>
+    );
+  }
+
+  const [sugRoutesData, setSugRoutesData] = useState([]);
+
+  useEffect(() => {
+    if (sugRoutesData.length === 0) {
+      handleStart();
+    }
+  }, [sugRoutesData]);
+
+  const handleStart = () => {
+    axios.get('http://localhost:3000/sugesteditineraries').then((res) => {
+      setSugRoutesData(res.data);
+    });
+  };
+
+  return (
+    <>
+      <RoutesContainer id='places'>
+        {sugRoutesData.map((route) => handleSugRoutes(route))}
+      </RoutesContainer>
     </>
   );
 };
