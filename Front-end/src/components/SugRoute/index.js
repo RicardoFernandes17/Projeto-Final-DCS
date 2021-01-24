@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router';
@@ -25,22 +26,27 @@ const SugRoute = (props) => {
   const [itinerary, setItinerary] = useState(null);
 
   const [value, setValue] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
-    if (itinerary === null && id) {
-      axios
-        .get('http://localhost:3000/sugesteditineraries/' + id, {
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Cookies.getJSON('token')}`,
-          },
-        })
-        .then((res) => {
-          if (res.data) {
-            setItinerary(res.data);
-          }
-        });
+    if (Cookies.get('token')) {
+      if (itinerary === null && id) {
+        axios
+          .get('http://localhost:3000/sugesteditineraries/' + id, {
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${Cookies.getJSON('token')}`,
+            },
+          })
+          .then((res) => {
+            if (res.data) {
+              setItinerary(res.data);
+            }
+          });
+      }
+    } else {
+      history.push('/signin');
     }
   }, [id, itinerary]);
   console.log(itinerary);
