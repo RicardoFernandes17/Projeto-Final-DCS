@@ -25,7 +25,7 @@ const SugRoutes = () => {
           </Column1>
           <Column2>
             <TextWrapper>
-              <Name to={'/route/id=' + data.id}>{data.name}</Name>
+              <Name to={'/sugroute/id=' + data.id}>{data.name}</Name>
               <City>{data.city}</City>
             </TextWrapper>
           </Column2>

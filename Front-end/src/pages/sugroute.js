@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
-import Route from '../components/Route';
+import SugRoute from '../components/SugRoute';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 
-const RoutePage = (props) => {
+const SugRoutePage = (props) => {
   const nick = props.match.params.nick;
   console.log(nick);
 
@@ -21,10 +21,10 @@ const RoutePage = (props) => {
       <ScrollToTop />
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />
-      <Route />
+      <SugRoute />
       <Footer />
     </>
   );
 };
 
-export default RoutePage;
+export default SugRoutePage;
