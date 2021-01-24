@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 import {
   CreateRouteContainer,
   CreateRouteWrapper,
@@ -15,29 +15,29 @@ import {
   Column1,
   Column2,
   FormWrap,
-} from "./CreateRouteElements";
-import Cookies from "js-cookie";
+} from './CreateRouteElements';
+import Cookies from 'js-cookie';
 
 const CreateRoute = () => {
   const [data, setData] = useState({
-    name: "",
-    hotel: "",
-    breakfast: "",
-    city: "",
-    morningactivity: "",
-    date_creation: "",
-    lunch: "",
-    afternoonactivity: "",
-    dinner: "",
-    eveningactivity: "",
+    name: '',
+    hotel: '',
+    breakfast: '',
+    city: '',
+    morningactivity: '',
+    date_creation: '',
+    lunch: '',
+    afternoonactivity: '',
+    dinner: '',
+    eveningactivity: '',
   });
   const history = useHistory();
 
   const [state, setState] = useState({
     open: false,
-    msg: "",
-    vertical: "top",
-    horizontal: "center",
+    msg: '',
+    vertical: 'top',
+    horizontal: 'center',
   });
 
   const [success, setSuccess] = useState(true);
@@ -57,7 +57,7 @@ const CreateRoute = () => {
     event.preventDefault();
 
     let date_creation = new Date().getTime();
-    let user_id = Cookies.get("user_id");
+    let user_id = Cookies.get('user_id');
 
     const route = {
       name: data.name,
@@ -76,21 +76,21 @@ const CreateRoute = () => {
 
     var config = {
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${Cookies.getJSON("token")}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Cookies.getJSON('token')}`,
       },
     };
 
     axios
-      .post("http://localhost:3000/itineraries", route, config)
+      .post('http://localhost:3000/itineraries', route, config)
       .then((res) => {
         if (res.status === 201) {
           setState({ ...state, open: true, msg: res.data.message });
           setSuccess(true);
           console.log(res);
           setTimeout(function timeout() {
-            history.push("/route?id=" + res.data.data.id);
+            history.push('/route/id=' + res.data.data.id);
           }, 1500);
         }
       })
@@ -115,7 +115,7 @@ const CreateRoute = () => {
       >
         <Alert
           onClose={handleClose}
-          severity={success === true ? "success" : "error"}
+          severity={success === true ? 'success' : 'error'}
         >
           {state.msg}
         </Alert>
@@ -128,98 +128,98 @@ const CreateRoute = () => {
             </Column1>
             <Column2>
               <CreationForm>
-                <Form onSubmit={handleSubmit} method="POST" action="">
-                  <FormLabel htmlFor="for">Nome:</FormLabel>
+                <Form onSubmit={handleSubmit} method='POST' action=''>
+                  <FormLabel htmlFor='for'>Nome:</FormLabel>
                   <FormInput
-                    name="name"
+                    name='name'
                     value={data.name}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="30"
+                    type='text'
+                    maxlength='30'
                     required
                   />
-                  <FormLabel htmlFor="for">Estadia:</FormLabel>
+                  <FormLabel htmlFor='for'>Estadia:</FormLabel>
                   <FormInput
-                    name="hotel"
+                    name='hotel'
                     value={data.hotel}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="50"
+                    type='text'
+                    maxlength='50'
                     required
                   />
-                  <FormLabel htmlFor="for">Pequeno-almoço</FormLabel>
+                  <FormLabel htmlFor='for'>Pequeno-almoço</FormLabel>
                   <FormInput
-                    name="breakfast"
+                    name='breakfast'
                     value={data.breakfast}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="50"
+                    type='text'
+                    maxlength='50'
                     required
                   />
-                  <FormLabel htmlFor="for">Atividade da manhã</FormLabel>
+                  <FormLabel htmlFor='for'>Atividade da manhã</FormLabel>
                   <FormInput
-                    name="morningactivity"
+                    name='morningactivity'
                     value={data.morningactivity}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="50"
+                    type='text'
+                    maxlength='50'
                     required
                   />
-                  <FormLabel htmlFor="for">Almoço</FormLabel>
+                  <FormLabel htmlFor='for'>Almoço</FormLabel>
                   <FormInput
-                    name="lunch"
+                    name='lunch'
                     value={data.lunch}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="50"
+                    type='text'
+                    maxlength='50'
                     required
                   />
-                  <FormLabel htmlFor="for">Atividade da tarde</FormLabel>
+                  <FormLabel htmlFor='for'>Atividade da tarde</FormLabel>
                   <FormInput
-                    name="afternoonactivity"
+                    name='afternoonactivity'
                     value={data.afternoonactivity}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="50"
+                    type='text'
+                    maxlength='50'
                     required
                   />
-                  <FormLabel htmlFor="for">Jantar</FormLabel>
+                  <FormLabel htmlFor='for'>Jantar</FormLabel>
                   <FormInput
-                    name="dinner"
+                    name='dinner'
                     value={data.dinner}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="50"
+                    type='text'
+                    maxlength='50'
                     required
                   />
-                  <FormLabel htmlFor="for">Atividade da noite</FormLabel>
+                  <FormLabel htmlFor='for'>Atividade da noite</FormLabel>
                   <FormInput
-                    name="eveningactivity"
+                    name='eveningactivity'
                     value={data.eveningactivity}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="50"
+                    type='text'
+                    maxlength='50'
                     required
                   />
-                  <FormLabel htmlFor="for">Cidade</FormLabel>
+                  <FormLabel htmlFor='for'>Cidade</FormLabel>
                   <FormInput
-                    name="city"
+                    name='city'
                     value={data.city}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="15"
+                    type='text'
+                    maxlength='15'
                     required
                   />
-                  <FormLabel htmlFor="for">Comment:</FormLabel>
+                  <FormLabel htmlFor='for'>Comment:</FormLabel>
                   <FormInput
-                    name="comments"
+                    name='comments'
                     value={data.comments}
                     onChange={handleChange}
-                    type="text"
-                    maxlength="30"
+                    type='text'
+                    maxlength='30'
                     required
                   />
-                  <FormButton type="submit">Criar</FormButton>
+                  <FormButton type='submit'>Criar</FormButton>
                 </Form>
               </CreationForm>
             </Column2>
