@@ -3,7 +3,6 @@ import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
 import RoutesP from '../components/RoutesP';
 import Footer from '../components/Footer';
-import { saoPedro2 } from '../components/RoutesP/data';
 import ScrollToTop from '../components/ScrollToTop';
 
 const RoutesPage = () => {

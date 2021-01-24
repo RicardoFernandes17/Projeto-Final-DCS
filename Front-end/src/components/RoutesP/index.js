@@ -51,12 +51,6 @@ const Routes = () => {
   const handleStart = () => {
     axios.get('http://localhost:3000/itineraries').then((res) => {
       setRoutesData(res.data);
-      /* for (var i = 0; i < res.data.length; i++) {
-        handleRoutes(res.data[i]);
-        console.log('nuno gay');
-         route.push(res.data[i].itinerario_id); 
-      } */
-      console.log(res);
     });
   };
 
