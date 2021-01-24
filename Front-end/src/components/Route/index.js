@@ -85,14 +85,16 @@ const RouteS = (props) => {
               <Name>{itinerary.name}</Name>
               <InfoWrapper>
                 <Col1>
-                  <City>{itinerary.name}</City>
-                  <Text>Estadia: {itinerary.name}</Text>
-                  <Text>Pequeno-Almoço: {itinerary.name}</Text>
-                  <Text>Atividade da manhã: {itinerary.name}</Text>
-                  <Text>Almoço: {itinerary.name}</Text>
-                  <Text>Atividade da tarde: {itinerary.name}</Text>
-                  <Text>Jantar: {itinerary.name}</Text>
-                  <Text>Atividade da noite: {itinerary.name}</Text>
+                  <City>{itinerary.city}</City>
+                  <Text>Estadia: {itinerary.accommodation}</Text>
+                  <Text>Pequeno-Almoço: {itinerary.breakfast}</Text>
+                  <Text>Atividade da manhã: {itinerary.morningActivity}</Text>
+                  <Text>Almoço: {itinerary.lunch}</Text>
+                  <Text>
+                    Atividade da tarde: {itinerary.activityAfterLunch}
+                  </Text>
+                  <Text>Jantar: {itinerary.dinner}</Text>
+                  <Text>Atividade da noite: {itinerary.nightActivity}</Text>
                 </Col1>
                 <Col2>
                   <StarIcon
