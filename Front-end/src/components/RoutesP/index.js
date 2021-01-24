@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   RoutesContainer,
   RoutesWrapper,
@@ -16,15 +16,13 @@ import {
 import axios from 'axios';
 
 const Routes = () => {
-  let route;
-
   function handleRoutes(data) {
-    route.push(
-      <RoutesWrapper>
+    return (
+      <RoutesWrapper key={data.itinerario_id}>
         <RoutesRow id={data.itinerario_id}>
           <Column1>
             <ImgWrap>
-              <Img alt='' />
+              <Img src='https://source.unsplash.com/random?portugal' alt='' />
             </ImgWrap>
           </Column1>
           <Column2>
@@ -41,21 +39,31 @@ const Routes = () => {
       </RoutesWrapper>
     );
   }
+
+  const [routesData, setRoutesData] = useState([]);
+
+  useEffect(() => {
+    if (routesData.length === 0) {
+      handleStart();
+    }
+  }, [routesData]);
+
   const handleStart = () => {
     axios.get('http://localhost:3000/itineraries').then((res) => {
-      for (var i = 0; i < res.data.length; i++) {
+      setRoutesData(res.data);
+      /* for (var i = 0; i < res.data.length; i++) {
         handleRoutes(res.data[i]);
-
-        /* route.push(res.data[i].itinerario_id); */
-      }
-      console.log(route);
+        console.log('nuno gay');
+         route.push(res.data[i].itinerario_id); 
+      } */
+      console.log(res);
     });
   };
 
   return (
     <>
-      <RoutesContainer id='places' onLoad={handleStart()}>
-        {route}
+      <RoutesContainer id='places'>
+        {routesData.map((route) => handleRoutes(route))}
       </RoutesContainer>
     </>
   );
