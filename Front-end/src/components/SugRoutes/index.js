@@ -20,15 +20,15 @@ const SugRoutes = ({ id, nick, placename, city, creator, img }) => {
         <RoutesRow id={id}>
           <Column1>
             <ImgWrap>
-              <Img src={img} alt="" />
+              <Img src={img} alt='' />
             </ImgWrap>
           </Column1>
           <Column2>
             <TextWrapper>
-              <Name to={"/route?id=" + id}>{placename}</Name>
+              <Name to={"/route/id=" + id}>{placename}</Name>
               <City>{city}</City>
               <Creator>
-                Created by: <CreatorLink to="/profile">{creator}</CreatorLink>
+                Created by: <CreatorLink to='/profile'>{creator}</CreatorLink>
               </Creator>
             </TextWrapper>
           </Column2>

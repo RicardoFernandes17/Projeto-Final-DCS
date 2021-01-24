@@ -12,7 +12,7 @@ import ProfilePage from "./pages/profile";
 import RoutesPage from "./pages/routesp";
 import SugRoutesPage from "./pages/sugroutes";
 import RoutePage from "./pages/route";
-import CreateRoutePage from "./pages/createroute"
+import CreateRoutePage from "./pages/createroute";
 import Cookies from "js-cookie";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -37,14 +37,14 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/signin" component={SigninPage} exact />
-        <Route path="/signup" component={SignupPage} exact />
-        <PrivateRoute path="/profile" component={ProfilePage} exact />
-        <Route path="/routes" component={RoutesPage} exact />
-        <Route path="/suggestedroutes" component={SugRoutesPage} exact />
-        <Route path="/route?id=:id" component={RoutePage} exact />
-        <PrivateRoute path="/createroute" component={CreateRoutePage} exact />
+        <Route path='/' component={Home} exact />
+        <Route path='/signin' component={SigninPage} exact />
+        <Route path='/signup' component={SignupPage} exact />
+        <PrivateRoute path='/profile' component={ProfilePage} exact />
+        <Route path='/routes' component={RoutesPage} exact />
+        <Route path='/suggestedroutes' component={SugRoutesPage} exact />
+        <Route path='/route/id=:id' component={RoutePage} exact />
+        <PrivateRoute path='/createroute' component={CreateRoutePage} exact />
       </Switch>
     </Router>
   );
