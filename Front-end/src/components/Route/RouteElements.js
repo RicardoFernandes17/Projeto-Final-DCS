@@ -26,10 +26,13 @@ export const RouteWrapper = styled.div`
 
 export const ImgWrap = styled.div`
   max-width: 100%;
+  margin: auto;
+  padding-top: 16px;
+  padding-bottom: 16px;
 `;
 
 export const Img = styled.img`
-  width: 100%;
+  height: 500px;
   max-height: 100%;
   margin: 0;
   padding-right: 0;

@@ -14,7 +14,7 @@ const SugestedItinerary = function (itinerary) {
 
 SugestedItinerary.create = (newItinerary, result) => {
   sql.query(
-    'INSERT INTO sugesteditineraries (name, city, accommodation,breakfast,morningActivity,lunch,activityAfterLunch,dinner,nightActivity) VALUES (?,?,?,?,?,?,?,?,?)',
+    "INSERT INTO sugesteditineraries (name, city, accommodation,breakfast,morningActivity,lunch,activityAfterLunch,dinner,nightActivity) VALUES (?,?,?,?,?,?,?,?,?)",
     [
       newItinerary.name,
       newItinerary.city,

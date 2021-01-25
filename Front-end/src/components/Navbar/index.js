@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { FaBars } from "react-icons/fa";
+import React, { useEffect, useState } from 'react';
+import { FaBars } from 'react-icons/fa';
 import {
   Nav,
   NavbarContainer,
@@ -12,16 +12,16 @@ import {
   NavBtnLink,
   NavLinksR,
   NavRed,
-} from "./NavbarElements";
-import { animateScroll as scroll } from "react-scroll";
-import Cookies from "js-cookie";
+} from './NavbarElements';
+import { animateScroll as scroll } from 'react-scroll';
+import Cookies from 'js-cookie';
 
 const Navbar = ({ toggle }) => {
   const [scrollNav, setScrollNav] = useState(false);
 
   window.homepagecheck = function () {
     var check = false;
-    if (document.location.pathname === "/") {
+    if (document.location.pathname === '/') {
       check = true;
     }
     return check;
@@ -36,7 +36,7 @@ const Navbar = ({ toggle }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", changeNav);
+    window.addEventListener('scroll', changeNav);
   }, []);
 
   const toggleHome = () => {
@@ -44,16 +44,17 @@ const Navbar = ({ toggle }) => {
   };
 
   const logOut = () => {
-    Cookies.remove("nome");
-    Cookies.remove("user_id");
-    Cookies.remove("token");
+    Cookies.remove('nome');
+    Cookies.remove('user_id');
+    Cookies.remove('token');
+    window.location.reload();
   };
 
   return (
     <>
       <Nav scrollNav={scrollNav}>
         <NavbarContainer>
-          <NavLogo to="/" onClick={toggleHome}>
+          <NavLogo to='/' onClick={toggleHome}>
             <NavRed>RUBY</NavRed>TRAILS
           </NavLogo>
           <MobileIcon onClick={toggle}>
@@ -64,11 +65,11 @@ const Navbar = ({ toggle }) => {
               <>
                 <NavItem>
                   <NavLinks
-                    to="braga"
+                    to='braga'
                     smooth={true}
                     duration={500}
                     spy={true}
-                    exact="true"
+                    exact='true'
                     offset={-80}
                   >
                     Braga
@@ -76,11 +77,11 @@ const Navbar = ({ toggle }) => {
                 </NavItem>
                 <NavItem>
                   <NavLinks
-                    to="porto"
+                    to='porto'
                     smooth={true}
                     duration={500}
                     spy={true}
-                    exact="true"
+                    exact='true'
                     offset={-80}
                   >
                     Porto
@@ -88,11 +89,11 @@ const Navbar = ({ toggle }) => {
                 </NavItem>
                 <NavItem>
                   <NavLinks
-                    to="lisboa"
+                    to='lisboa'
                     smooth={true}
                     duration={500}
                     spy={true}
-                    exact="true"
+                    exact='true'
                     offset={-80}
                   >
                     Lisboa
@@ -103,24 +104,24 @@ const Navbar = ({ toggle }) => {
               <></>
             )}
             <NavItem>
-              <NavLinksR to="/suggestedroutes">Rotas Sugeridas</NavLinksR>
+              <NavLinksR to='/suggestedroutes'>Rotas Sugeridas</NavLinksR>
             </NavItem>
             <NavItem>
-              <NavLinksR to="/routes">Rotas</NavLinksR>
+              <NavLinksR to='/routes'>Rotas</NavLinksR>
             </NavItem>
-            {!Cookies.get("token") ? (
+            {!Cookies.get('token') ? (
               <NavItem>
-                <NavLinksR to="/signup">Sign Up</NavLinksR>
+                <NavLinksR to='/signup'>Sign Up</NavLinksR>
               </NavItem>
             ) : (
               <NavItem>
-                <NavLinksR to="/profile">Profile</NavLinksR>
+                <NavLinksR to='/profile'>Profile</NavLinksR>
               </NavItem>
             )}
           </NavMenu>
           <NavBtn>
-            {!Cookies.get("token") ? (
-              <NavBtnLink to="/signin">Sign In</NavBtnLink>
+            {!Cookies.get('token') ? (
+              <NavBtnLink to='/signin'>Sign In</NavBtnLink>
             ) : (
               <NavBtnLink onClick={logOut}>Sign Out</NavBtnLink>
             )}

@@ -11,7 +11,9 @@ import {
   Name,
   City,
 } from './SugRoutesElements';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const SugRoutes = () => {
   function handleSugRoutes(data) {
@@ -25,7 +27,7 @@ const SugRoutes = () => {
           </Column1>
           <Column2>
             <TextWrapper>
-              <Name to={'/route/id=' + data.id}>{data.name}</Name>
+              <Name to={'/sugroute/id=' + data.id}>{data.name}</Name>
               <City>{data.city}</City>
             </TextWrapper>
           </Column2>
@@ -41,11 +43,16 @@ const SugRoutes = () => {
       handleStart();
     }
   }, [sugRoutesData]);
+  const history = useHistory();
 
   const handleStart = () => {
-    axios.get('http://localhost:3000/sugesteditineraries').then((res) => {
-      setSugRoutesData(res.data);
-    });
+    if (Cookies.get('token')) {
+      axios.get('http://localhost:3000/sugesteditineraries').then((res) => {
+        setSugRoutesData(res.data);
+      });
+    } else {
+      history.push('/signin');
+    }
   };
 
   return (
