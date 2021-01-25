@@ -1,6 +1,12 @@
 const Rating = require("../models/rating.model.js");
 
 exports.create = (req, res) => {
+  const rating = new Rating({
+    rating_id: req.body.rating_id,
+    rating_value: req.body.rating_value,
+    itinerario_id: req.body.itinerario_id,
+    user_id: req.body.user_id,
+  });
   Rating.create(rating, (err, data) => {
     if (err)
       res.status(500).send({
@@ -13,12 +19,6 @@ exports.create = (req, res) => {
       message: "Content can not be empty!",
     });
   }
-  const rating = new Rating({
-    rating_id: req.body.rating_id,
-    rating_value: req.body.rating_value,
-    itinerario_id: req.body.itinerario_id,
-    user_id: req.body.user_id,
-  });
 
   // Save rating on database
 };
