@@ -30,7 +30,7 @@ const RouteS = (props) => {
 
   const [value, setValue] = useState(0);
 
-  const [rating, setRating] = useState(null);
+  const [rating, setRating] = useState(0);
   const [count, setCount] = useState(null);
 
   const history = useHistory();
