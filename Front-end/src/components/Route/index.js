@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import { useParams } from 'react-router';
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useParams } from "react-router";
 import {
   RouteContainer,
   RouteWrapper,
@@ -20,7 +20,7 @@ import {
   Col1,
   Col2,
   StarIcon,
-} from './RouteElements';
+} from "./RouteElements";
 /* import {FaStar} from 'react-icons/fa' */
 
 const RouteS = (props) => {
@@ -30,33 +30,37 @@ const RouteS = (props) => {
 
   const [value, setValue] = useState(0);
 
+  const [rating, setRating] = useState(0);
+  const [count, setCount] = useState(null);
+
   const history = useHistory();
 
   useEffect(() => {
-    if (Cookies.get('token')) {
+    if (Cookies.get("token")) {
       if (itinerary === null && id) {
         axios
-          .get('http://localhost:3000/itineraries/' + id, {
+          .get("http://localhost:3000/itineraries/" + id, {
             headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${Cookies.getJSON('token')}`,
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${Cookies.getJSON("token")}`,
             },
           })
           .then((res) => {
             if (res.data) {
+              getRatingAverage();
               setItinerary(res.data);
             }
           });
       }
     } else {
-      history.push('/signin');
+      history.push("/signin");
     }
   }, [id, itinerary]);
   console.log(itinerary);
 
   const handleRating = (rating) => {
-    let user_id = Cookies.get('user_id');
+    let user_id = Cookies.get("user_id");
     let itinerario_id = itinerary.itinerario_id;
 
     const dataRating = {
@@ -65,11 +69,24 @@ const RouteS = (props) => {
       user_id: user_id,
     };
 
-    axios.post('http://localhost:3000/reviews', dataRating).then((res) => {
+    axios.post("http://localhost:3000/reviews", dataRating).then((res) => {
       console.log(res);
     });
 
     setValue(rating);
+  };
+  const getRatingAverage = () => {
+    axios.get("http://localhost:3000/reviews/" + id).then((res) => {
+      let data = res.data;
+      let count = 0;
+      for (let i = 0; i < data.length; i++) {
+        count = count + data[i].rating;
+      }
+      let avg = count / data.length;
+      console.log(count);
+      setRating(avg);
+      setCount(data.length);
+    });
   };
 
   /*  */
@@ -79,7 +96,7 @@ const RouteS = (props) => {
         <RouteContainer>
           <RouteWrapper id={itinerary.itinerario_id}>
             <ImgWrap>
-              <Img src='https://source.unsplash.com/random?portugal'></Img>
+              <Img src="https://source.unsplash.com/random?portugal"></Img>
             </ImgWrap>
             <TextWrapper>
               <Name>{itinerary.name}</Name>
@@ -122,13 +139,13 @@ const RouteS = (props) => {
                     filled={value >= 5 ? true : false}
                     onClick={() => handleRating(5)}
                   />
-                  <RatingValue>{itinerary.name} Estrelas</RatingValue>
-                  <RatingCount>{itinerary.name} Avaliações</RatingCount>
+                  <RatingValue>{rating} Estrelas</RatingValue>
+                  <RatingCount>{count} Avaliações</RatingCount>
                 </Col2>
               </InfoWrapper>
               <Creator>
-                Created by:{' '}
-                <CreatorLink to='/profile'>{itinerary.name}</CreatorLink>
+                Created by:{" "}
+                <CreatorLink to="/profile">{itinerary.name}</CreatorLink>
               </Creator>
             </TextWrapper>
           </RouteWrapper>
