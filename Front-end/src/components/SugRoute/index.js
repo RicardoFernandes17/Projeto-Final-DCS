@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router';
@@ -25,22 +26,27 @@ const SugRoute = (props) => {
   const [itinerary, setItinerary] = useState(null);
 
   const [value, setValue] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
-    if (itinerary === null && id) {
-      axios
-        .get('http://localhost:3000/sugesteditineraries/' + id, {
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Cookies.getJSON('token')}`,
-          },
-        })
-        .then((res) => {
-          if (res.data) {
-            setItinerary(res.data);
-          }
-        });
+    if (Cookies.get('token')) {
+      if (itinerary === null && id) {
+        axios
+          .get('http://localhost:3000/sugesteditineraries/' + id, {
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${Cookies.getJSON('token')}`,
+            },
+          })
+          .then((res) => {
+            if (res.data) {
+              setItinerary(res.data);
+            }
+          });
+      }
+    } else {
+      history.push('/signin');
     }
   }, [id, itinerary]);
   console.log(itinerary);
@@ -58,21 +64,20 @@ const SugRoute = (props) => {
               <Name>{itinerary.name}</Name>
               <InfoWrapper>
                 <Col1>
-                  <City>{itinerary.name}</City>
-                  <Text>Estadia: {itinerary.name}</Text>
-                  <Text>Pequeno-Almoço: {itinerary.name}</Text>
-                  <Text>Atividade da manhã: {itinerary.name}</Text>
-                  <Text>Almoço: {itinerary.name}</Text>
-                  <Text>Atividade da tarde: {itinerary.name}</Text>
-                  <Text>Jantar: {itinerary.name}</Text>
-                  <Text>Atividade da noite: {itinerary.name}</Text>
+                  <City>{itinerary.city}</City>
+                  <Text>Estadia: {itinerary.accommodation}</Text>
+                  <Text>Pequeno-Almoço: {itinerary.breakfast}</Text>
+                  <Text>Atividade da manhã: {itinerary.morningActivity}</Text>
+                  <Text>Almoço: {itinerary.lunch}</Text>
+                  <Text>
+                    Atividade da tarde: {itinerary.activityAfterLunch}
+                  </Text>
+                  <Text>Jantar: {itinerary.dinner}</Text>
+                  <Text>Atividade da noite: {itinerary.nightActivity}</Text>
                 </Col1>
                 <Col2></Col2>
               </InfoWrapper>
-              <Creator>
-                Created by:{' '}
-                <CreatorLink to='/profile'>{itinerary.name}</CreatorLink>
-              </Creator>
+              <Creator>Created by: RUBYTRAILS</Creator>
             </TextWrapper>
           </RouteWrapper>
         </RouteContainer>

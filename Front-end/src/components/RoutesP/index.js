@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import {
   RoutesContainer,
@@ -14,7 +13,9 @@ import {
   Creator,
   CreatorLink,
 } from './RoutesElements';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Routes = () => {
   function handleRoutes(data) {
@@ -49,10 +50,16 @@ const Routes = () => {
     }
   }, [routesData]);
 
+  const history = useHistory();
+
   const handleStart = () => {
-    axios.get('http://localhost:3000/itineraries').then((res) => {
-      setRoutesData(res.data);
-    });
+    if (Cookies.get('token')) {
+      axios.get('http://localhost:3000/itineraries').then((res) => {
+        setRoutesData(res.data);
+      });
+    } else {
+      history.push('/signin');
+    }
   };
 
   return (
