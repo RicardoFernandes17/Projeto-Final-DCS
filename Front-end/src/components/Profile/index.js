@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 import {
   ProfileContainer,
@@ -9,7 +9,10 @@ import {
   Column1,
   TextWrapper,
   Nome,
-} from "./ProfileElements";
+  Column2,
+  Img,
+  ImgWrap,
+} from './ProfileElements';
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -22,11 +25,11 @@ const Profile = () => {
 
   const getData = () => {
     axios
-      .get("http://localhost:3000/profile", {
+      .get('http://localhost:3000/profile', {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.getJSON("token")}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Cookies.getJSON('token')}`,
         },
       })
       .then((res) => {
@@ -49,11 +52,14 @@ const Profile = () => {
                 {/* <Idade>{idade} anos.</Idade> */}
               </TextWrapper>
             </Column1>
-            {/* <Column2>
+            <Column2>
               <ImgWrap>
-                <Img src={img} alt={alt}></Img>
+                <Img
+                  src='https://source.unsplash.com/random?portrait'
+                  alt={profileData.user_mail}
+                ></Img>
               </ImgWrap>
-            </Column2> */}
+            </Column2>
           </ProfileRow>
         </ProfileWrapper>
       </ProfileContainer>
