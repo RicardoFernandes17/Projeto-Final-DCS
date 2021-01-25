@@ -4,16 +4,17 @@ import {
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
-import Home from "./pages";
-import SigninPage from "./pages/signin";
-import SignupPage from "./pages/signup";
-import ProfilePage from "./pages/profile";
-import RoutesPage from "./pages/routesp";
-import SugRoutesPage from "./pages/sugroutes";
-import RoutePage from "./pages/route";
-import CreateRoutePage from "./pages/createroute";
-import Cookies from "js-cookie";
+} from 'react-router-dom';
+import Home from './pages';
+import SigninPage from './pages/signin';
+import SignupPage from './pages/signup';
+import ProfilePage from './pages/profile';
+import RoutesPage from './pages/routesp';
+import SugRoutesPage from './pages/sugroutes';
+import RoutePage from './pages/route';
+import SugRoutePage from './pages/sugroute';
+import CreateRoutePage from './pages/createroute';
+import Cookies from 'js-cookie';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -62,6 +63,7 @@ function App() {
         <Route path='/routes' component={RoutesPage} exact />
         <Route path='/suggestedroutes' component={SugRoutesPage} exact />
         <Route path='/route/id=:id' component={RoutePage} exact />
+        <Route path='/sugroute/id=:id' component={SugRoutePage} exact />
         <PrivateRoute path='/createroute' component={CreateRoutePage} exact />
       </Switch>
     </Router>

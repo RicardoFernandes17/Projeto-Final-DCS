@@ -14,15 +14,12 @@ import {
   City,
   Creator,
   CreatorLink,
-  RatingCount,
-  RatingValue,
   Col1,
   Col2,
-  StarIcon,
-} from './RouteElements';
+} from '../Route/RouteElements';
 /* import {FaStar} from 'react-icons/fa' */
 
-const RouteS = (props) => {
+const SugRoute = (props) => {
   let { id } = useParams();
   console.log(id);
   const [itinerary, setItinerary] = useState(null);
@@ -32,7 +29,7 @@ const RouteS = (props) => {
   useEffect(() => {
     if (itinerary === null && id) {
       axios
-        .get('http://localhost:3000/itineraries/' + id, {
+        .get('http://localhost:3000/sugesteditineraries/' + id, {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
@@ -47,23 +44,6 @@ const RouteS = (props) => {
     }
   }, [id, itinerary]);
   console.log(itinerary);
-
-  const handleRating = (rating) => {
-    let user_id = Cookies.get('user_id');
-    let itinerario_id = itinerary.itinerario_id;
-
-    const dataRating = {
-      rating_value: rating,
-      itinerario_id: itinerario_id,
-      user_id: user_id,
-    };
-
-    axios.post('http://localhost:3000/reviews', dataRating).then((res) => {
-      console.log(res);
-    });
-
-    setValue(rating);
-  };
 
   /*  */
   return (
@@ -87,35 +67,7 @@ const RouteS = (props) => {
                   <Text>Jantar: {itinerary.name}</Text>
                   <Text>Atividade da noite: {itinerary.name}</Text>
                 </Col1>
-                <Col2>
-                  <StarIcon
-                    rate={1}
-                    filled={value >= 1 ? true : false}
-                    onClick={() => handleRating(1)}
-                  />
-                  <StarIcon
-                    rate={2}
-                    filled={value >= 2 ? true : false}
-                    onClick={() => handleRating(2)}
-                  />
-                  <StarIcon
-                    rate={3}
-                    filled={value >= 3 ? true : false}
-                    onClick={() => handleRating(3)}
-                  />
-                  <StarIcon
-                    rate={4}
-                    filled={value >= 4 ? true : false}
-                    onClick={() => handleRating(4)}
-                  />
-                  <StarIcon
-                    rate={5}
-                    filled={value >= 5 ? true : false}
-                    onClick={() => handleRating(5)}
-                  />
-                  <RatingValue>{itinerary.name} Estrelas</RatingValue>
-                  <RatingCount>{itinerary.name} Avaliações</RatingCount>
-                </Col2>
+                <Col2></Col2>
               </InfoWrapper>
               <Creator>
                 Created by:{' '}
@@ -131,4 +83,4 @@ const RouteS = (props) => {
   );
 };
 
-export default RouteS;
+export default SugRoute;
