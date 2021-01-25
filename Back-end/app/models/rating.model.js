@@ -41,4 +41,20 @@ Rating.getAll = (result) => {
   });
 };
 
+Rating.getAverage = (itineraryId, result) => {
+  sql.query(
+    "SELECT rating_value AS rating from rating where itinerario_id = ?",
+    [itineraryId],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      result(null, res);
+    }
+  );
+};
+
 module.exports = Rating;
