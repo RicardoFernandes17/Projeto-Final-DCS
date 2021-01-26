@@ -6,7 +6,7 @@ module.exports = (app) => {
   // Retrieve all users
   app.get("/reviews", rating.findAll);
 
-  app.get("/reviews/:itineraryId", rating.getAverage);
+  app.get("/topReviews", rating.Average);
 
   // Delete all  users
 };
