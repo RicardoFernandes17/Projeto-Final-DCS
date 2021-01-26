@@ -10,6 +10,7 @@ import SigninPage from './pages/signin';
 import SignupPage from './pages/signup';
 import ProfilePage from './pages/profile';
 import RoutesPage from './pages/routesp';
+import TopRoutesPage from './pages/toproutes';
 import SugRoutesPage from './pages/sugroutes';
 import RoutePage from './pages/route';
 import SugRoutePage from './pages/sugroute';
@@ -62,6 +63,7 @@ function App() {
         <PrivateRoute path='/profile' component={ProfilePage} exact />
         <Route path='/routes' component={RoutesPage} exact />
         <Route path='/suggestedroutes' component={SugRoutesPage} exact />
+        <Route path='/toproutes' component={TopRoutesPage} exact />
         <Route path='/route/id=:id' component={RoutePage} exact />
         <Route path='/sugroute/id=:id' component={SugRoutePage} exact />
         <PrivateRoute path='/createroute' component={CreateRoutePage} exact />

@@ -57,7 +57,6 @@ const RouteS = (props) => {
       history.push("/signin");
     }
   }, [id, itinerary]);
-  console.log(itinerary);
 
   const handleRating = (rating) => {
     let user_id = Cookies.get("user_id");
@@ -89,6 +88,34 @@ const RouteS = (props) => {
     });
   };
 
+  const handleDelete = () => {
+    axios
+      .delete("http://localhost:3000/itineraries/" + id, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.getJSON("token")}`,
+        },
+      })
+      .then(() => {
+        history.push("/routes");
+      });
+  };
+
+  const handleUpdate = () => {
+    axios
+      .delete("http://localhost:3000/itineraries/" + id, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.getJSON("token")}`,
+        },
+      })
+      .then(() => {
+        history.push("/routes");
+      });
+  };
+
   /*  */
   return (
     <>
@@ -96,7 +123,7 @@ const RouteS = (props) => {
         <RouteContainer>
           <RouteWrapper id={itinerary.itinerario_id}>
             <ImgWrap>
-              <Img src="https://source.unsplash.com/random?portugal"></Img>
+              <Img src='https://source.unsplash.com/random?portugal'></Img>
             </ImgWrap>
             <TextWrapper>
               <Name>{itinerary.name}</Name>
@@ -141,11 +168,16 @@ const RouteS = (props) => {
                   />
                   <RatingValue>{rating} Estrelas</RatingValue>
                   <RatingCount>{count} Avaliações</RatingCount>
+                  {itinerary.user_id == Cookies.get("user_id") && (
+                    <h1 style={{ cursor: "pointer" }} onClick={handleDelete}>
+                      Apagar Rota
+                    </h1>
+                  )}
                 </Col2>
               </InfoWrapper>
               <Creator>
                 Created by:{" "}
-                <CreatorLink to="/profile">{itinerary.name}</CreatorLink>
+                <CreatorLink to='/profile'>{itinerary.name}</CreatorLink>
               </Creator>
             </TextWrapper>
           </RouteWrapper>
