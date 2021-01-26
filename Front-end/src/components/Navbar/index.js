@@ -109,6 +109,9 @@ const Navbar = ({ toggle }) => {
             <NavItem>
               <NavLinksR to='/routes'>Rotas</NavLinksR>
             </NavItem>
+            <NavItem>
+              <NavLinksR to='/toproutes'>Top Rotas</NavLinksR>
+            </NavItem>
             {!Cookies.get('token') ? (
               <NavItem>
                 <NavLinksR to='/signup'>Sign Up</NavLinksR>
