@@ -41,10 +41,25 @@ Rating.getAll = (result) => {
   });
 };
 
-Rating.getAverage = (itineraryId, result) => {
+// Rating.getAverage = (itineraryId, result) => {
+//   sql.query(
+//     "SELECT itinerario_id, AVG(rating_value) FROM rating GROUP BY itinerario_id ORDER BY AVG(rating_value)DESC",
+//     [itineraryId],
+//     (err, res) => {
+//       if (err) {
+//         console.log("error: ", err);
+//         result(null, err);
+//         return;
+//       }
+
+//       result(null, res);
+//     }
+//   );
+// };
+
+Rating.getAverage = (result) => {
   sql.query(
-    "SELECT rating_value AS rating from rating where itinerario_id = ?",
-    [itineraryId],
+    "SELECT itinerario_id, AVG(rating_value) FROM rating GROUP BY itinerario_id ORDER BY AVG(rating_value)DESC",
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -52,6 +67,7 @@ Rating.getAverage = (itineraryId, result) => {
         return;
       }
 
+      console.log("rating: ", res);
       result(null, res);
     }
   );

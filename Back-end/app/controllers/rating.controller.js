@@ -34,19 +34,30 @@ exports.findAll = (req, res) => {
   });
 };
 
-exports.getAverage = (req, res) => {
-  Rating.getAverage(req.params.itineraryId, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found itinerary with id ${req.params.itineraryId}.`,
-        });
-      } else {
-        res.status(500).send({
-          message:
-            "Error retrieving itinerary with id " + req.params.itineraryId,
-        });
-      }
-    } else res.send(data);
+exports.Average = (req, res) => {
+  Rating.getAverage((err, data) => {
+    if ((!req, err))
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Itineraries.",
+      });
+    else res.send(data);
   });
 };
+
+// exports.getAverage = (req, res) => {
+//   Rating.getAverage(req.params.itineraryId, (err, data) => {
+//     if (err) {
+//       if (err.kind === "not_found") {
+//         res.status(404).send({
+//           message: `Not found itinerary with id ${req.params.itineraryId}.`,
+//         });
+//       } else {
+//         res.status(500).send({
+//           message:
+//             "Error retrieving itinerary with id " + req.params.itineraryId,
+//         });
+//       }
+//     } else res.send(data);
+//   });
+// };
